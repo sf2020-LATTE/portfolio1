@@ -1,7 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
-from django.http import HttpResponse
-
 def index(request):
-  return HttpResponse("仮のトップページ")
+  return render(request, "jpapp/index.html")
