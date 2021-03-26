@@ -121,3 +121,6 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR,'static') # 追加
 #静的ファイルをどんなURLで公開するのかを決める
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = "jpapp:home"
+LOGOUT_REDIRECT_URL = "jpapp:index"
