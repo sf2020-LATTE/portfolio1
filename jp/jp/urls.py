@@ -18,7 +18,7 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path("jpapp/",include("jpappp.urls")),
+    path("jpapp/",include("jpapp.urls")),
     path('admin/', admin.site.urls),
 
 ]
