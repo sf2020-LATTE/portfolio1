@@ -13,7 +13,7 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'jpapp:index' %}">kanban</a>
+        <a class="navbar-brand" href="{% url 'jpapp:index' %}">jp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,9 +24,10 @@
 
             <!-- ここから追記 -->
             {% if request.user.is_authenticated %}
-            <span class="navbar-text">
-              こんにちは {{ request.user.username }} さん
-            </span>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'jpapp:users_detail' request.user.pk %}">{{ request.user.username }}</a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
             </li>
