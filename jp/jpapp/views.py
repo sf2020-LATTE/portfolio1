@@ -6,6 +6,7 @@ from django.shortcuts import render,redirect
 def index(request):
   return render(request, "jpapp/index.html")
 
+@login_required
 def home(request):
     return render(request, "jpapp/home.html")
 
