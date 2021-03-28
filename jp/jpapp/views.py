@@ -6,6 +6,7 @@ from django.shortcuts import render,redirect, resolve_url
 from django.views.generic import DetailView, UpdateView
 
 from .forms import UserForm
+from .mixins import OnlyYouMixin
 
 def index(request):
   return render(request, "jpapp/index.html")
@@ -33,10 +34,13 @@ class UserDetailView(DetailView):
     model = User
     template_name = "jpapp/users/detail.html"
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(OnlyYouMixin, UpdateView):
     model = User
     template_name = "jpapp/users/update.html"
     form_class = UserForm
 
     def get_success_url(self):
         return resolve_url('jpapp:users_detail', pk=self.kwargs['pk'])
+
+
+
