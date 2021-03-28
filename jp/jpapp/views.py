@@ -47,7 +47,7 @@ class UserUpdateView(OnlyYouMixin, UpdateView):
 
 class CompanyCreateView(LoginRequiredMixin, CreateView):
     model = Company
-    template_name = "jpapp/Company/create.html"
+    template_name = "jpapp/companies/create.html"
     form_class = CompanyForm
     success_url = reverse_lazy("jpapp:home")
 
