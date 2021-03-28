@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render,redirect, resolve_url
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, UpdateView, CreateView, ListView
+from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
 from .forms import UserForm, CompanyForm
 from . models import Company
@@ -70,3 +70,9 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return resolve_url('jpapp:companies_detail', pk=self.kwargs['pk'])
+
+class CompanyDeleteView(LoginRequiredMixin, DeleteView):
+    model = Company
+    template_name = "jpapp/companies/delete.html"
+    form_class = CompanyForm
+    success_url = reverse_lazy("jpapp:companies_list")
