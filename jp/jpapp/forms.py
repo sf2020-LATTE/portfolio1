@@ -12,5 +12,5 @@ class UserForm(forms.ModelForm):
 class CompanyForm(forms.ModelForm):
 
     class Meta:
-        model = List
+        model = Company
         fields = ("company_name",)
