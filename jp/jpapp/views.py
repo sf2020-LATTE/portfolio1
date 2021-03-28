@@ -2,8 +2,8 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User 
-from django.shortcuts import render,redirect
-from django.views.generic import DetailView 
+from django.shortcuts import render,redirect, resolve_url
+from django.views.generic import DetailView, UpdateView 
 
 def index(request):
   return render(request, "jpapp/index.html")
