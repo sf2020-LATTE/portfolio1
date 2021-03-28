@@ -6,7 +6,7 @@
     <p class="lead">JPで〇〇を効率化</p>
     <hr class="my-4">
     <p>Django</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">ログイン</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">サインアップ</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'login' %}"  role="button">ログイン</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'jpapp:signup' %}" role="button">サインアップ</a>
   </div>
 {% endblock %}
