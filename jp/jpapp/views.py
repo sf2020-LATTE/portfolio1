@@ -49,7 +49,7 @@ class CompanyCreateView(LoginRequiredMixin, CreateView):
     model = Company
     template_name = "jpapp/companies/create.html"
     form_class = CompanyForm
-    success_url = reverse_lazy("jpapp:home")
+    success_url = reverse_lazy("jpapp:companies_list")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
