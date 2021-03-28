@@ -69,4 +69,4 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     form_class = CompanyForm
 
     def get_success_url(self):
-        return resolve_url('jpapp:Companies_detail', pk=self.kwargs['pk'])
+        return resolve_url('jpapp:companies_detail', pk=self.kwargs['pk'])
