@@ -62,3 +62,11 @@ class CompanyListView(LoginRequiredMixin, ListView):
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     model = Company
     template_name = "jpapp/companies/detail.html"
+
+class CompanyUpdateView(LoginRequiredMixin, UpdateView):
+    model = Company
+    template_name = "jpapp/companies/update.html"
+    form_class = CompanyForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:Companies_detail', pk=self.kwargs['pk'])
