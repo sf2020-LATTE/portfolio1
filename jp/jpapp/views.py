@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render,redirect, resolve_url
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, UpdateView, CreateView
+from django.views.generic import DetailView, UpdateView, CreateView, ListView
 
 from .forms import UserForm, CompanyForm
 from . models import Company
@@ -55,6 +55,6 @@ class CompanyCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-
-
-
+class CompanyListView(LoginRequiredMixin, ListView):
+    model = Company
+    template_name = "jpapp/companies/list.html"
