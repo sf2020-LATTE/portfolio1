@@ -8,8 +8,12 @@
     <a href="{% url 'jpapp:companies_detail' list.pk %}" class="card">
       <div class="card-body">
         <h5 class="card-title">{{ list.company_name }}</h5>
+        <a>場所：{{ list.location }}</a>
+        <a>資本金：{{ list.capital }}</a>
+        <a>従業員：{{ list.total_employee }}</a>
+        <a>設立：{{ list.establishd }}</a>
         <footer>
-          <!-- <small class="text-muted">作成者: {{ company_name.user.username }}</small> -->
+          {{ list.description }}
         </footer>
       </div>
     </a>
