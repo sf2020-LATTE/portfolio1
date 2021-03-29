@@ -4,7 +4,6 @@
 <div class="container">
   <h1>リスト一覧</h1>
   <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button">作成</a> 
-  <div class="card-columns">
     {% for list in company_list %}
     <a href="{% url 'jpapp:companies_detail' list.pk %}" class="card">
       <div class="card-body">
