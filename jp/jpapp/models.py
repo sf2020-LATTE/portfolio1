@@ -21,3 +21,14 @@ class Company(models.Model):
         return self.total_employee
         return self.establishd
         return self.description
+
+class Todo(model.Model):
+    task = models.CharField(max_length=100)
+    memo = TextField()
+    duedate = model.DateField()
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.task
+    
