@@ -87,3 +87,12 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+class TaskListView(LoginRequiredMixin, ListView):
+    model = Task
+    template_name = "jpapp/tasks/list.html"
+
+
+class CardDetailView(LoginRequiredMixin, DetailView):
+    model = Task
+    template_name = "jpapp/tasks/detail.html"
