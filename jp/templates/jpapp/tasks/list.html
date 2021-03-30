@@ -5,7 +5,7 @@
   <h1>カード一覧</h1>
   <a class="btn btn-primary my-3" href="{% url 'jpapp:tasks_create' %}" role="button">作成</a>
   <div class="card-columns">
-    {% for card in card_list %}
+    {% for task in task_list %}
     <a href="{% url 'jpapp:tasks_detail' task.pk %}" class="card">
       <div class="card-body">
         <h5 class="card-title">{{ task.task_title }}</h5>

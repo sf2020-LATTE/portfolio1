@@ -18,4 +18,6 @@ urlpatterns = [
     path("companies/<int:pk>/delete/", views.CompanyDeleteView.as_view(), name="companies_delete"),
     #Task
     path("tasks/create/", views.TaskCreateView.as_view(), name="tasks_create"),
+    path("tasks/", views.TaskListView.as_view(), name="tasks_list"),
+    path("tasks/<int:pk>/", views.TaskDetailView.as_view(), name="tasks_detail"),
 ]

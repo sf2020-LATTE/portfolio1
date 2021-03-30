@@ -93,6 +93,6 @@ class TaskListView(LoginRequiredMixin, ListView):
     template_name = "jpapp/tasks/list.html"
 
 
-class CardDetailView(LoginRequiredMixin, DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "jpapp/tasks/detail.html"
