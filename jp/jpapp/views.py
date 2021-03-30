@@ -96,3 +96,17 @@ class TaskListView(LoginRequiredMixin, ListView):
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "jpapp/tasks/detail.html"
+
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
+    model = Task
+    template_name = "jpapp/tasks/update.html"
+    form_class = TaskForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:tasks_detail', pk=self.kwargs['pk'])
+
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
+    model = Task
+    template_name = "jpapp/tasks/delete.html"
+    form_class = TaskForm
+    success_url = reverse_lazy("jpapp:tasks_list")
