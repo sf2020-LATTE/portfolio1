@@ -14,4 +14,7 @@
   <dd class="col-sm-9">{{ card.user.username }}</dd>
 </dl>
 
+<a class="btn btn-primary" href="{% url 'jpapp:tasks_update' task.pk  %}" role="button">編集</a>
+<a class="btn btn-danger" href="{% url 'jpapp:tasks_delete' task.pk  %}" role="button">削除</a>
+
 {% endblock %}
