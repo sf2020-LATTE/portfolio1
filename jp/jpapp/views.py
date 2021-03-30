@@ -7,8 +7,8 @@ from django.shortcuts import render,redirect, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm
-from . models import Company
+from .forms import UserForm, CompanyForm, TaskForm
+from . models import Company, Task
 from .mixins import OnlyYouMixin
 
 def index(request):
@@ -76,3 +76,37 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "jpapp/companies/delete.html"
     form_class = CompanyForm
     success_url = reverse_lazy("jpapp:companies_list")
+
+
+class TaskCreateView(LoginRequiredMixin, CreateView):
+    model = Task
+    template_name = "jpapp/Tasks/create.html"
+    form_class = TaskForm
+    success_url = reverse_lazy("jpapp:tasks_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class TaskListView(LoginRequiredMixin, ListView):
+    model = Task
+    template_name = "jpapp/tasks/list.html"
+
+
+class TaskDetailView(LoginRequiredMixin, DetailView):
+    model = Task
+    template_name = "jpapp/tasks/detail.html"
+
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
+    model = Task
+    template_name = "jpapp/tasks/update.html"
+    form_class = TaskForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:tasks_detail', pk=self.kwargs['pk'])
+
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
+    model = Task
+    template_name = "jpapp/tasks/delete.html"
+    form_class = TaskForm
+    success_url = reverse_lazy("jpapp:tasks_list")
