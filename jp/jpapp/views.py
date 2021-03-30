@@ -77,3 +77,13 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
     form_class = CompanyForm
     success_url = reverse_lazy("jpapp:companies_list")
 
+
+class TodoCreateView(LoginRequiredMixin, CreateView):
+    model = Todo
+    template_name = "jpapp/Todo/create.html"
+    form_class = CardForm
+    success_url = reverse_lazy("kanban:home")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
