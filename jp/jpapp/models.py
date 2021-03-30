@@ -15,11 +15,12 @@ class Company(models.Model):
     location = models.TextField()
     capital = models.IntegerField()
     total_employee = models.IntegerField()
-    establishd = models.DateField()
+    establishd = models.DateField(null=True)
     description = models.TextField()
     phase = models.CharField(
       max_length = 50,
-      choices = CHOICE
+      choices = CHOICE,
+      default='light'
     )
 
     #ForeignKey は一対多を表現するリレーションシップ型
