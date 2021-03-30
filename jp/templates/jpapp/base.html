@@ -22,10 +22,13 @@
           </ul>
           <ul class="navbar-nav">
 
-            <!-- ここから追記 -->
             {% if request.user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'jpapp:users_detail' request.user.pk %}">{{ request.user.username }}</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'jpapp:companies_list' %}">企業一覧</a>
             </li>
 
             <li class="nav-item">
@@ -40,8 +43,6 @@
               <a class="nav-link" href="{% url 'jpapp:signup' %}">サインアップ</a>
             </li>
             {% endif %}
-            <!-- ここまで追記 -->
-
           </ul>
         </div>
       </nav>

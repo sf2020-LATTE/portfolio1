@@ -2,11 +2,13 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
 from django.shortcuts import render,redirect, resolve_url
-from django.views.generic import DetailView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm
+from .forms import UserForm, CompanyForm
+from . models import Company
 from .mixins import OnlyYouMixin
 
 def index(request):
@@ -43,5 +45,34 @@ class UserUpdateView(OnlyYouMixin, UpdateView):
     def get_success_url(self):
         return resolve_url('jpapp:users_detail', pk=self.kwargs['pk'])
 
+class CompanyCreateView(LoginRequiredMixin, CreateView):
+    model = Company
+    template_name = "jpapp/companies/create.html"
+    form_class = CompanyForm
+    success_url = reverse_lazy("jpapp:companies_list")
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
+class CompanyListView(LoginRequiredMixin, ListView):
+    model = Company
+    template_name = "jpapp/companies/list.html"
+
+class CompanyDetailView(LoginRequiredMixin, DetailView):
+    model = Company
+    template_name = "jpapp/companies/detail.html"
+
+class CompanyUpdateView(LoginRequiredMixin, UpdateView):
+    model = Company
+    template_name = "jpapp/companies/update.html"
+    form_class = CompanyForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:companies_detail', pk=self.kwargs['pk'])
+
+class CompanyDeleteView(LoginRequiredMixin, DeleteView):
+    model = Company
+    template_name = "jpapp/companies/delete.html"
+    form_class = CompanyForm
+    success_url = reverse_lazy("jpapp:companies_list")

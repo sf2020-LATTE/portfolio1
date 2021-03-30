@@ -1,0 +1,15 @@
+{% extends "jpapp/base.html" %}
+
+{% block content %}
+
+<h1>リスト詳細</h1>
+<dl class="row">
+  <dt class="col-sm-3">タイトル</dt>
+  <dd class="col-sm-9">{{ company.company_name }}</dd>
+  <!-- <dt class="col-sm-3">ユーザー名</dt>
+  <dd class="col-sm-9">{{ company.user.username }}</dd> -->
+</dl>
+
+<a class="btn btn-primary" href="{% url 'jpapp:companies_update' company.pk  %}" role="button">編集</a>
+<a class="btn btn-danger" href="{% url 'jpapp:companies_delete' company.pk  %}" role="button">削除</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "jpapp/base.html" %}
+
+{% block content %}
+<div class="container">
+  <h1>リスト一覧</h1>
+  <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button">作成</a> 
+    {% for list in company_list %}
+    <a href="{% url 'jpapp:companies_detail' list.pk %}" class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ list.company_name }}</h5>
+        <a>場所：{{ list.location }}</a>
+        <a>資本金：{{ list.capital }}</a>
+        <a>従業員：{{ list.total_employee }}</a>
+        <a>設立：{{ list.establishd }}</a>
+        <footer>
+          {{ list.description }}
+        </footer>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
