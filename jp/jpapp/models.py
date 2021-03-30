@@ -22,10 +22,10 @@ class Company(models.Model):
         return self.establishd
         return self.description
 
-class Todo(model.Model):
+class Todo(models.Model):
     task = models.CharField(max_length=100)
-    memo = TextField()
-    duedate = model.DateField()
+    memo = models.TextField()
+    duedate = models.DateField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
