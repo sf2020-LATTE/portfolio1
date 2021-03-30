@@ -7,8 +7,8 @@ from django.shortcuts import render,redirect, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm, TodoForm
-from . models import Company, Todo
+from .forms import UserForm, CompanyForm, TaskForm
+from . models import Company, Task
 from .mixins import OnlyYouMixin
 
 def index(request):
@@ -78,11 +78,11 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("jpapp:companies_list")
 
 
-class TodoCreateView(LoginRequiredMixin, CreateView):
-    model = Todo
-    template_name = "jpapp/Todo/create.html"
-    form_class = CardForm
-    success_url = reverse_lazy("kanban:home")
+class TaskCreateView(LoginRequiredMixin, CreateView):
+    model = Task
+    template_name = "jpapp/Tasks/create.html"
+    form_class = TaskForm
+    success_url = reverse_lazy("jpapp:home")
 
     def form_valid(self, form):
         form.instance.user = self.request.user

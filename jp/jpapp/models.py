@@ -22,9 +22,10 @@ class Company(models.Model):
         return self.establishd
         return self.description
 
-class Todo(models.Model):
-    task = models.CharField(max_length=100)
-    memo = models.TextField()
+#テーブル名は複数形にするため、Todoからtaskに変更
+class Task(models.Model):
+    task_title = models.CharField(max_length=100)
+    task_memo = models.TextField()
     duedate = models.DateField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
