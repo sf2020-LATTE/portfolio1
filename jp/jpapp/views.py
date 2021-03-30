@@ -76,3 +76,4 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "jpapp/companies/delete.html"
     form_class = CompanyForm
     success_url = reverse_lazy("jpapp:companies_list")
+

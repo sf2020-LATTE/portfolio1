@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Company
-from .models import Todo
+from .models import Company,Todo
 
 class UserForm(forms.ModelForm):
 
