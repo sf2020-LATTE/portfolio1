@@ -82,7 +82,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     template_name = "jpapp/Tasks/create.html"
     form_class = TaskForm
-    success_url = reverse_lazy("jpapp:home")
+    success_url = reverse_lazy("jpapp:tasks_list")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
