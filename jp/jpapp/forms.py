@@ -9,13 +9,11 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ("username", "last_name", "first_name", "email",)
 
-
 class CompanyForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ("company_name","location", "capital","total_employee","establishd","description")
-
+        fields = ("company_name","location", "capital","total_employee","establishd","description","phase")
 
 class TaskForm(forms.ModelForm):
 
