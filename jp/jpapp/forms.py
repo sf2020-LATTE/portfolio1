@@ -14,7 +14,7 @@ class CompanyForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ("company_name","location", "capital","total_employee","establishd","description")
+        fields = ("company_name","location", "capital","total_employee","establishd","description","phase")
 
 
 class TaskForm(forms.ModelForm):
@@ -22,3 +22,4 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ("task_title","task_memo","duedate")
+        

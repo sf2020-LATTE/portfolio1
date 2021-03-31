@@ -4,22 +4,34 @@
 <div class="container">
   <h1>リスト一覧</h1>
   <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button">作成</a> 
+  <div class="row">
+    <div class="col-8 bgred">
+      <p>企業情報</p>
+    </div>
+    <div class="col-4 bgblue">
+      <p>選考フェーズ</p>
+    </div>
+  </div>
     {% for list in company_list %}
     <div class="alert alert-{{ list.phase }}" role="alert">
-    </div>
-    <a href="{% url 'jpapp:companies_detail' list.pk %}" class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ list.company_name }}</h5>
-        <a>場所：{{ list.location }}</a>
-        <a>資本金：{{ list.capital }}</a>
-        <a>従業員：{{ list.total_employee }}</a>
-        <a>設立：{{ list.establishd }}</a>
-        <footer>
-          {{ list.description }}
-        </footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-8"><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a>
+          </div>
+          <div class="col-4">{{ list.phase }}</div>
+        </div>
+        <div class="row">
+          </div>
+          <div class="col"><p>資本金:{{ list.capital }}</p>
+          </div>
+          <div class="col"><p>従業員:{{ list.total_employee }}</p>
+          </div>
+          <div class="col"><p>設立:{{ list.establishd }}</p>
+          </div>
+        </div>
       </div>
-    </a>
+    </div>
     {% endfor %}
-  </div>
+  </a>
 </div>
 {% endblock %}
