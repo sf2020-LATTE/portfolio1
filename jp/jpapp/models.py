@@ -1,14 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-CHOICE = (('light', 'document_screening'),
-          ('light', 'information_session'),
-          ('alert', 'first_interview'),
-          ('alert', 'second_interview'),
-          ('alert', 'third_interview'),
-          ('alert', 'fourth_interview'),
-          ('danger', 'pass'),
-          ('dark', 'failure'))
+CHOICE = ((0, '書類選考'),
+          (1, 'カジュアル面談'),
+          (2, '一次面接'),
+          (3, '二次面接'),
+          (4, '三次面接'),
+          (5, '四次面接'),
+          (6, '内定'),
+          (7, 'お見送り'))
 
 class Company(models.Model):
     company_name = models.CharField(max_length=200)
@@ -17,10 +17,10 @@ class Company(models.Model):
     total_employee = models.IntegerField()
     establishd = models.DateField(null=True)
     description = models.TextField()
-    phase = models.CharField(
-      max_length = 50,
+    phase = models.IntegerField(
+      # max_length = 50,
       choices = CHOICE,
-      default='light'
+      default='0'
     )
 
     #ForeignKey は一対多を表現するリレーションシップ型

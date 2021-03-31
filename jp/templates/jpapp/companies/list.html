@@ -18,9 +18,21 @@
         <div class="row">
           <div class="col-8"><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a>
           </div>
-          <div class="col-4">{{ list.phase }}</div>
+          <div class="col-4">
+            {% if list.phase == 7 %}
+              <h5><span class="badge bg-secondary">{{ list.get_phase_display }}</span></h5>
+            {% elif list.phase == 6 %}
+              <h5><span class="badge bg-danger">{{ list.get_phase_display }}</span></h5>
+            {% elif list.phase == 7 %}
+              <h5><span class="badge bg-info">{{ list.get_phase_display }}</span></h5>
+            {% else %}
+              <h5><span class="badge bg-light">{{ list.get_phase_display }}</span></h5>
+            {% endif %}
+            
+          </div>
         </div>
         <div class="row">
+          <div class="col"><p>場所:{{ list.location }}</p>
           </div>
           <div class="col"><p>資本金:{{ list.capital }}</p>
           </div>
