@@ -42,5 +42,9 @@ class Task(models.Model):
 
 class BoardModel(model.Model):
     board_title = models.CharField(max_length=100)
-    board_memo = models.TextField()
-    duedate = models.DateField()
+    borad_content = models.TextField()
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.board_title
