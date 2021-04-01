@@ -39,4 +39,8 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task
-    
+
+class BoardModel(model.Model):
+    board_title = models.CharField(max_length=100)
+    board_memo = models.TextField()
+    duedate = models.DateField()
