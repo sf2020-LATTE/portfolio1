@@ -7,8 +7,8 @@ from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm, TaskForm, BoardForm
-from . models import Company, Task, Board
+from .forms import UserForm, CompanyForm, TaskForm, BoardForm, CommentForm
+from . models import Company, Task, Board, Comment
 from .mixins import OnlyYouMixin
 
 def index(request):
