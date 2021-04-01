@@ -3,15 +3,15 @@
 {% block content %}
 
 <div class="alert alert-primary" role="alert">
-    <h3>掲示板</h3>
+    <h3>詳細ページ</h3>
 </div>
 
 <div class="container">
   {% for item in object_list %}
   <div class="alert alert-success" role="alert">
-    <p>タイトル:{{ item.board_title }}</p>
-    <p>内容:{{ item.board_content }}</p>
-    <p>投稿者:{{ item.user }}</p>
+    <p>タイトル:{ object.board_title }</p>
+    <p>内容:{ object.board_content }</p>
+    <p>投稿者:{ object.user }</p>
     <a href="#" class="btn btn-primary" role="button" aria-pressed="true">primarylink</a>
     <a href="#" class="btn btn-secondary" role="button" aria-pressed="true">primarylink</a>
   </div>

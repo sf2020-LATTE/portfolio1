@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-from .views import board_list
+from .views import board_list, board_detail
 
 app_name = "jpapp"
 
@@ -27,4 +27,5 @@ urlpatterns = [
     #Board
     path('boards/', board_list, name='board_list'),
     path("boards/create/", views.BoardCreateView.as_view(), name="boards_create"),
+    path('boards/<int:pk>/', board_detail, name='board_detail'),
 ]

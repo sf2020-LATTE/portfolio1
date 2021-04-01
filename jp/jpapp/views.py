@@ -124,3 +124,7 @@ class BoardCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+def board_detail(request, pk):
+    object = get_object_or_404(Board, pk)
+    return render(request, 'jpapp/boards/detail.html', {'object':object})
