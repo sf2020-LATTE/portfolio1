@@ -128,6 +128,23 @@ class BoardCreateView(LoginRequiredMixin, CreateView):
 def boards_detail(request, pk):
     object = get_object_or_404(Board, pk=pk)
     return render(request, 'jpapp/boards/detail.html', {'object':object})
+    #コメント
+    comments = Comment.objects.filter(post=post).order_by('-created_at')
+    if request.method == "POST":
+        form = CommentForm(request.POST or None)
+        if form.is_valid():
+            text = request.POST.get('text')
+            comment = Comment.objects.create(post=post, user=request.user, text=text)
+            comment.save()
+            return redirect('jpappapp:detail', post_id=post.id)
+    else:
+        form = CmtForm()
+    context = {
+        'post': post,
+        'comments': comments,
+        'form': form,
+    }
+    return render(request, 'blog_app/detail.html', {'post': post, 'form': form, 'comments': comments})
 
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
