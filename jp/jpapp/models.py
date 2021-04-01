@@ -39,4 +39,17 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task
-    
+
+def board_list(request):
+    object_list = Board.objects.all()
+    return render(request, 'jpapp/boards/list.html', {'object_list':object_list})
+
+class Board(models.Model):
+    board_title = models.CharField(max_length=100)
+    board_content = models.TextField()
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.board_title
+

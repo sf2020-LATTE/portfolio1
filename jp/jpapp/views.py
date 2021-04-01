@@ -3,12 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import render,redirect, resolve_url
+from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm, TaskForm
-from . models import Company, Task
+from .forms import UserForm, CompanyForm, TaskForm, BoardForm
+from . models import Company, Task, Board
 from .mixins import OnlyYouMixin
 
 def index(request):
@@ -110,3 +110,35 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "jpapp/tasks/delete.html"
     form_class = TaskForm
     success_url = reverse_lazy("jpapp:tasks_list")
+
+def boards_list(request):
+    object_list = Board.objects.all()
+    return render(request, 'jpapp/boards/list.html', {'object_list':object_list})
+
+class BoardCreateView(LoginRequiredMixin, CreateView):
+    model = Board
+    template_name = "jpapp/boards/create.html"
+    form_class = BoardForm
+    success_url = reverse_lazy("jpapp:boards_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+def boards_detail(request, pk):
+    object = get_object_or_404(Board, pk=pk)
+    return render(request, 'jpapp/boards/detail.html', {'object':object})
+
+class BoardUpdateView(LoginRequiredMixin, UpdateView):
+    model = Board
+    template_name = "jpapp/boards/update.html"
+    form_class = BoardForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:boards_detail', pk=self.kwargs['pk'])
+
+class BoardDeleteView(LoginRequiredMixin, DeleteView):
+    model = Board
+    template_name = "jpapp/boards/delete.html"
+    form_class = BoardForm
+    success_url = reverse_lazy("jpapp:boards_list")

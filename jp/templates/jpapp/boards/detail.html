@@ -1,0 +1,16 @@
+{% extends "jpapp/base.html" %}
+
+{% block content %}
+
+<div class="alert alert-primary" role="alert">
+    <h3>詳細ページ</h3>
+</div>
+<a href="{% url 'jpapp:boards_list' %}">ボード一覧へ戻る</a>
+<div class="container">
+  <div class="alert alert-success" role="alert">
+    <p>タイトル:{{ object.board_title }}</p>
+    <p>内容:{{ object.board_content }}</p>
+    <p>投稿者:{{ object.user }}</p>
+  </div>
+</div>
+{% endblock %}
