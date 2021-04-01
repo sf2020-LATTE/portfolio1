@@ -5,14 +5,12 @@
 <div class="alert alert-primary" role="alert">
     <h3>詳細ページ</h3>
 </div>
-
+<a href="{% url 'jpapp:boards_list' %}">ボード一覧へ戻る</a>
 <div class="container">
   <div class="alert alert-success" role="alert">
     <p>タイトル:{{ object.board_title }}</p>
     <p>内容:{{ object.board_content }}</p>
     <p>投稿者:{{ object.user }}</p>
-    <a href="{% url 'jpapp:boards_update' item.pk %}" class="btn btn-primary" role="button" aria-pressed="true">編集</a>
-    <a href="{% url 'jpapp:boards_delete' item.pk %}" class="btn btn-secondary" role="button" aria-pressed="true">削除</a>
   </div>
 </div>
 {% endblock %}
