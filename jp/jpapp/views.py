@@ -110,3 +110,6 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "jpapp/tasks/delete.html"
     form_class = TaskForm
     success_url = reverse_lazy("jpapp:tasks_list")
+
+def board_list(request):
+    return render(request, 'list.html', {})
