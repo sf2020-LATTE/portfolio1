@@ -112,4 +112,4 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("jpapp:tasks_list")
 
 def board_list(request):
-    return render(request, 'list.html', {})
+    return render(request, 'jpapp/boards/list.html', {})
