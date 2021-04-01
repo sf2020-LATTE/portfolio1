@@ -40,9 +40,9 @@ class Task(models.Model):
     def __str__(self):
         return self.task
 
-class BoardModel(models.Model):
+class Board(models.Model):
     board_title = models.CharField(max_length=100)
-    borad_content = models.TextField()
+    board_content = models.TextField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

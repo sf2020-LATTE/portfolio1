@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
 from .forms import UserForm, CompanyForm, TaskForm
-from . models import Company, Task, BoardModel
+from . models import Company, Task, Board
 from .mixins import OnlyYouMixin
 
 def index(request):
@@ -112,14 +112,14 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("jpapp:tasks_list")
 
 def board_list(request):
-    object_list = BoardModel.objects.all()
+    object_list = Board.objects.all()
     return render(request, 'jpapp/boards/list.html', {'object_list':object_list})
 
 
 class BoardCreateView(LoginRequiredMixin, CreateView):
-    model = BoardModel
+    model = Board
     template_name = "jpapp/boards/create.html"
-    form_class = BoardForm
+    #form_class = BoardForm
     success_url = reverse_lazy("jpapp:boards_list")
 
     def form_valid(self, form):
