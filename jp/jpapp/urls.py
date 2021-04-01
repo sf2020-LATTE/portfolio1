@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+from .views import board_list
+
 app_name = "jpapp"
 
 urlpatterns = [
@@ -22,4 +24,6 @@ urlpatterns = [
     path("tasks/<int:pk>/", views.TaskDetailView.as_view(), name="tasks_detail"),
     path("tasks/<int:pk>/update/", views.TaskUpdateView.as_view(), name="tasks_update"),
     path("tasks/<int:pk>/delete/", views.TaskDeleteView.as_view(), name="tasks_delete"),
+    #Board
+    path('boards/', board_list, name='board_list')
 ]
