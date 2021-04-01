@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
 from .forms import UserForm, CompanyForm, TaskForm
-from . models import Company, Task, Board
+from . models import Company, Task, BoardModel
 from .mixins import OnlyYouMixin
 
 def index(request):
