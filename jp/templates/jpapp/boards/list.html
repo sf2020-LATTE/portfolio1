@@ -9,7 +9,7 @@
 <div class="container">
   {% for item in object_list %}
   <div class="alert alert-success" role="alert">
-    <p>タイトル:<a href="{% url 'jpapp:board_detail' item.pk %}">{{ item.board_title }}</a></p>
+    <p>タイトル:<a href="{% url 'jpapp:boards_detail' item.pk %}">{{ item.board_title }}</a></p>
     <p>内容:{{ item.board_content }}</p>
     <p>投稿者:{{ item.user }}</p>
     <a href="#" class="btn btn-primary" role="button" aria-pressed="true">primarylink</a>

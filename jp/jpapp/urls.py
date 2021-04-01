@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-from .views import board_list, board_detail
+from .views import boards_list, boards_detail
 
 app_name = "jpapp"
 
@@ -25,7 +25,8 @@ urlpatterns = [
     path("tasks/<int:pk>/update/", views.TaskUpdateView.as_view(), name="tasks_update"),
     path("tasks/<int:pk>/delete/", views.TaskDeleteView.as_view(), name="tasks_delete"),
     #Board
-    path('boards/', board_list, name='board_list'),
+    path('boards/', boards_list, name='boards_list'),
     path("boards/create/", views.BoardCreateView.as_view(), name="boards_create"),
-    path('boards/<int:pk>/', board_detail, name='board_detail'),
+    path('boards/<int:pk>/', boards_detail, name='boards_detail'),
+    path("boards/<int:pk>/update/", views.BoardUpdateView.as_view(), name="boards_update"),
 ]
