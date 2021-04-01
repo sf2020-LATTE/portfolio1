@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
 from .forms import UserForm, CompanyForm, TaskForm
-from . models import Company, Task
+from . models import Company, Task, Board
 from .mixins import OnlyYouMixin
 
 def index(request):
@@ -112,4 +112,5 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("jpapp:tasks_list")
 
 def board_list(request):
-    return render(request, 'jpapp/boards/list.html', {})
+    object_list = BoardModel.objects.all()
+    return render(request, 'jpapp/boards/list.html', {'object_list':object_list})
