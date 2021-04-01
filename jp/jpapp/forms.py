@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Company,Task,Board
+from .models import Company, Task, Board, Comment
 
 class UserForm(forms.ModelForm):
 
@@ -26,3 +26,9 @@ class BoardForm(forms.ModelForm):
     class Meta:
         model = Board
         fields = ("board_title","board_content")
+
+
+class CmtForm(forms.ModelForm):    
+   class Meta:
+       model = Comment
+       fields = ['text']
