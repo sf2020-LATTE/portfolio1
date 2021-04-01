@@ -40,7 +40,7 @@ class Task(models.Model):
     def __str__(self):
         return self.task
 
-class BoardModel(model.Model):
+class BoardModel(models.Model):
     board_title = models.CharField(max_length=100)
     borad_content = models.TextField()
 
