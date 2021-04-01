@@ -146,6 +146,12 @@ def boards_detail(request, pk):
     }
     return render(request, 'blog_app/detail.html', {'board': board, 'form': form, 'comments': comments})
 
+#コメント削除
+def comment_delete(request, comment_id):
+   comment = get_object_or_404(Comment, id=comment_id)
+   comment.delete()
+   return redirect('blog_app:detail', post_id=comment.post.id)
+
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
     template_name = "jpapp/boards/update.html"

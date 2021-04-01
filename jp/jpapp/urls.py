@@ -30,4 +30,6 @@ urlpatterns = [
     path('boards/<int:pk>/', boards_detail, name='boards_detail'),
     path("boards/<int:pk>/update/", views.BoardUpdateView.as_view(), name="boards_update"),
     path("boards/<int:pk>/delete/", views.BoardDeleteView.as_view(), name="boards_delete"),
+    #コメント
+    path('comment/<int:comment_id>/', views.comment_delete, name='comment_delete'),
 ]
