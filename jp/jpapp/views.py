@@ -129,22 +129,22 @@ def boards_detail(request, pk):
     object = get_object_or_404(Board, pk=pk)
     return render(request, 'jpapp/boards/detail.html', {'object':object})
     #コメント
-    comments = Comment.objects.filter(post=post).order_by('-created_at')
+    comments = Comment.objects.filter(board=board).order_by('-created_at')
     if request.method == "POST":
         form = CommentForm(request.POST or None)
         if form.is_valid():
             text = request.POST.get('text')
-            comment = Comment.objects.create(post=post, user=request.user, text=text)
+            comment = Comment.objects.create(board=board, user=request.user, text=text)
             comment.save()
-            return redirect('jpappapp:detail', post_id=post.id)
+            return redirect('jpapp:detail', board_id=board.id)
     else:
         form = CmtForm()
     context = {
-        'post': post,
+        'board': board,
         'comments': comments,
         'form': form,
     }
-    return render(request, 'blog_app/detail.html', {'post': post, 'form': form, 'comments': comments})
+    return render(request, 'blog_app/detail.html', {'board': board, 'form': form, 'comments': comments})
 
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
