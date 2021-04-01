@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import render,redirect, resolve_url
+from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
@@ -126,5 +126,5 @@ class BoardCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 def board_detail(request, pk):
-    object = get_object_or_404(Board, pk)
+    object = get_object_or_404(Board, pk=pk)
     return render(request, 'jpapp/boards/detail.html', {'object':object})
