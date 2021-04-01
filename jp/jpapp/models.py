@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+import datetime
+from django.utils import timezone
+
 CHOICE = ((0, '書類選考'),
           (1, 'カジュアル面談'),
           (2, '一次面接'),
