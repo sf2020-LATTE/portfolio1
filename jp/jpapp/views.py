@@ -7,7 +7,7 @@ from django.shortcuts import render,redirect, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm, TaskForm
+from .forms import UserForm, CompanyForm, TaskForm, BoardForm
 from . models import Company, Task, Board
 from .mixins import OnlyYouMixin
 
@@ -115,11 +115,10 @@ def board_list(request):
     object_list = Board.objects.all()
     return render(request, 'jpapp/boards/list.html', {'object_list':object_list})
 
-
 class BoardCreateView(LoginRequiredMixin, CreateView):
     model = Board
     template_name = "jpapp/boards/create.html"
-    #form_class = BoardForm
+    form_class = BoardForm
     success_url = reverse_lazy("jpapp:boards_list")
 
     def form_valid(self, form):
