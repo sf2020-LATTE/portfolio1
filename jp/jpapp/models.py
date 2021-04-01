@@ -53,3 +53,10 @@ class Board(models.Model):
     def __str__(self):
         return self.board_title
 
+class Comment(models.Model):
+   text = models.TextField('コメント')
+   board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='comments')
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
+   created_at = models.DateTimeField('投稿日', default=timezone.now)
+   def __str__(self):
+       return self.text
