@@ -114,4 +114,14 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 def board_list(request):
     object_list = BoardModel.objects.all()
     return render(request, 'jpapp/boards/list.html', {'object_list':object_list})
-    
+
+
+class BoardCreateView(LoginRequiredMixin, CreateView):
+    model = BoardModel
+    template_name = "jpapp/boards/create.html"
+    form_class = BoardForm
+    success_url = reverse_lazy("jpapp:boards_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
