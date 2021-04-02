@@ -129,6 +129,7 @@ def boards_detail(request, pk):
     object = get_object_or_404(Board, pk=pk)
     return render(request, 'jpapp/boards/detail.html', {'object':object})
     #コメント
+    board = get_object_or_404(Board, id=board_id)
     comments = Comment.objects.filter(board=board).order_by('-created_at')
     if request.method == "POST":
         form = CommentForm(request.POST or None)
@@ -138,19 +139,19 @@ def boards_detail(request, pk):
             comment.save()
             return redirect('jpapp:detail', board_id=board.id)
     else:
-        form = CmtForm()
+        form = CommentForm()
     context = {
         'board': board,
         'comments': comments,
         'form': form,
     }
-    return render(request, 'blog_app/detail.html', {'board': board, 'form': form, 'comments': comments})
+    return render(request, 'jpapp/boards/detail.html', {'board': board, 'form': form, 'comments': comments})
 
 #コメント削除
 def comment_delete(request, comment_id):
    comment = get_object_or_404(Comment, id=comment_id)
    comment.delete()
-   return redirect('blog_app:detail', post_id=comment.post.id)
+   return redirect('jpapp:boards/detail', post_id=comment.post.id)
 
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
