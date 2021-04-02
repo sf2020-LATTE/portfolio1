@@ -28,7 +28,7 @@ class BoardForm(forms.ModelForm):
         fields = ("board_title","board_content")
 
 
-class CmtForm(forms.ModelForm):    
+class CommentForm(forms.ModelForm):    
    class Meta:
        model = Comment
        fields = ['text']
