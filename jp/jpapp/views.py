@@ -10,6 +10,8 @@ from django.views.generic import DetailView, UpdateView, CreateView, ListView, D
 from .forms import UserForm, CompanyForm, TaskForm, BoardForm, CommentForm
 from . models import Company, Task, Board, Comment
 from .mixins import OnlyYouMixin
+
+from django.template.loader import render_to_string
 from django.http import JsonResponse
 
 def index(request):
@@ -127,11 +129,11 @@ class BoardCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 def boards_detail(request, pk):
-    object = get_object_or_404(Board, pk=pk)
-    return render(request, 'jpapp/boards/detail.html', {'object':object})
-    
+    #object = get_object_or_404(Board, pk=pk)
+    #return render(request, 'jpapp/boards/detail.html', {'object':object})
+
     #コメント
-    board = get_object_or_404(Board, id=board_id)
+    board = get_object_or_404(Board, id=pk)
 
     comments = Comment.objects.filter(board=board).order_by('-created_at')
     if request.method == "POST":
@@ -155,9 +157,9 @@ def boards_detail(request, pk):
 
 #コメント削除
 def comment_delete(request, comment_id):
-   comment = get_object_or_404(Comment, id=comment_id)
-   comment.delete()
-   return redirect('jpapp:boards/detail', post_id=comment.post.id)
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    return redirect('jpapp:boards_detail', pk=comment.board.id)
 
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
