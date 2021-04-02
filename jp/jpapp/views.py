@@ -10,6 +10,7 @@ from django.views.generic import DetailView, UpdateView, CreateView, ListView, D
 from .forms import UserForm, CompanyForm, TaskForm, BoardForm, CommentForm
 from . models import Company, Task, Board, Comment
 from .mixins import OnlyYouMixin
+from django.http import JsonResponse
 
 def index(request):
   return render(request, "jpapp/index.html")
@@ -128,8 +129,10 @@ class BoardCreateView(LoginRequiredMixin, CreateView):
 def boards_detail(request, pk):
     object = get_object_or_404(Board, pk=pk)
     return render(request, 'jpapp/boards/detail.html', {'object':object})
+    
     #コメント
     board = get_object_or_404(Board, id=board_id)
+
     comments = Comment.objects.filter(board=board).order_by('-created_at')
     if request.method == "POST":
         form = CommentForm(request.POST or None)
@@ -137,7 +140,7 @@ def boards_detail(request, pk):
             text = request.POST.get('text')
             comment = Comment.objects.create(board=board, user=request.user, text=text)
             comment.save()
-            return redirect('jpapp:detail', board_id=board.id)
+            #return redirect('jpapp:detail', board_id=board.id)
     else:
         form = CommentForm()
     context = {
@@ -145,6 +148,9 @@ def boards_detail(request, pk):
         'comments': comments,
         'form': form,
     }
+    if request.is_ajax():
+       html = render_to_string('jpapp/comment.html', context, request=request )
+       return JsonResponse({'form': html})    
     return render(request, 'jpapp/boards/detail.html', {'board': board, 'form': form, 'comments': comments})
 
 #コメント削除
