@@ -8,9 +8,12 @@
 <a href="{% url 'jpapp:boards_list' %}">ボード一覧へ戻る</a>
 <div class="container">
   <div class="alert alert-success" role="alert">
-    <p>タイトル:{{ object.board_title }}</p>
-    <p>内容:{{ object.board_content }}</p>
-    <p>投稿者:{{ object.user }}</p>
+    <p>タイトル:{{ board.board_title }}</p>
+    <p>内容:{{ board.board_content }}</p>
+    <p>投稿者:{{ board.user }}</p>
   </div>
+  <div class="main-comment-section">
+    {% include 'jpapp/comment.html' %}
+   </div>
 </div>
 {% endblock %}
