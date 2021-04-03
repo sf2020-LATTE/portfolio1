@@ -83,7 +83,7 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
-    template_name = "jpapp/Tasks/create.html"
+    template_name = "jpapp/tasks/create.html"
     form_class = TaskForm
     success_url = reverse_lazy("jpapp:tasks_list")
 
