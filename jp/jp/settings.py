@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import environ
 import os
 from pathlib import Path
 
@@ -19,11 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jw-1j!-!_g7v1ufh+g+umj55bmgh*6$@e8^+be#f!%h=limfr_'
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = 'jw-1j!-!_g7v1ufh+g+umj55bmgh*6$@e8^+be#f!%h=limfr_'
+SECRET_KEY = env('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -75,10 +78,11 @@ WSGI_APPLICATION = 'jp.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    'default': env.db(),
 }
 
 
@@ -125,3 +129,8 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = "jpapp:home"
 LOGOUT_REDIRECT_URL = "jpapp:index"
 LOGIN_URL = "login"
+
+
+#デプロイ用設定
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
