@@ -1,7 +1,10 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
+{% load static %}
+<img src="{% static "jpapp/2535295_l.jpg" %}" class="img-fluid" alt="Responsive image">
   <div class="container">
+
     <h1 class="display-4">JP</h1>
     <p class="lead">JPで〇〇を効率化</p>
     <hr class="my-4">
@@ -9,4 +12,5 @@
     <a class="btn btn-primary btn-lg" href="{% url 'login' %}"  role="button">ログイン</a>
     <a class="btn btn-primary btn-lg" href="{% url 'jpapp:signup' %}" role="button">サインアップ</a>
   </div>
+
 {% endblock %}
