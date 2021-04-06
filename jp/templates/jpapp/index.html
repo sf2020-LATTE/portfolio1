@@ -1,12 +1,45 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
-  <div class="container">
-    <h1 class="display-4">JP</h1>
-    <p class="lead">JPで〇〇を効率化</p>
-    <hr class="my-4">
-    <p>Django</p>
-    <a class="btn btn-primary btn-lg" href="{% url 'login' %}"  role="button">ログイン</a>
-    <a class="btn btn-primary btn-lg" href="{% url 'jpapp:signup' %}" role="button">サインアップ</a>
+{% load static %}
+<div class="main-image">
+  <img src="{% static "jpapp/2535295_l2.jpg" %}" class="img-fluid" alt="Responsive image">
+</div>
+<div class="container">
+  <div class="card-deck">
+    <div class="card">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+      <div class="card-body">
+        <h5 class="card-title">企業一覧機能</h5>
+        <p class="card-text">企業の情報、選考状況を一覧で管理することができます</p>
+      </div>
+    </div>
+    <div class="card">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+      <div class="card-body">
+        <h5 class="card-title">タスク管理機能</h5>
+        <p class="card-text">転職活動に関わるタスクを管理することができます</p>
+      </div>
+    </div>
+    <div class="card">
+      <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+      <div class="card-body">
+        <h5 class="card-title">掲示板機能</h5>
+        <p class="card-text">転職活動の悩みの共有や質問ができます</p>
+      </div>
+    </div>
   </div>
+  <div class="jumbotron">
+    <div class="jumbotron-upper">
+      <h1 class="display-4">Job portで快適な転職活動をはじめませんか？</h1>
+    </div>
+    <div class="jumbotron-lower">
+      <a class="btn btn-info btn-lg" href="{% url 'login' %}"  role="button"><i class="fas fa-sign-in-alt"></i>ログイン</a>
+      <a class="btn btn-info btn-lg" href="{% url 'jpapp:signup' %}" role="button"><i class="fas fa-user-plus"></i>サインアップ</a>
+    </div>
+  </div>
+</div>
+
+
+
 {% endblock %}

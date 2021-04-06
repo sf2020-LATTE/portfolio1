@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from . import settings
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("jpapp/",include("jpapp.urls")),
     path('jpapp/', include('django.contrib.auth.urls')), 
     path('admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

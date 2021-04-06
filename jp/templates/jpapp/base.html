@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -8,12 +10,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'jpapp/custom.css' %}">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <title>JP</title>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'jpapp:index' %}">jp</a>
+      <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <a class="navbar-brand" href="{% url 'jpapp:index' %}">Job Port <i class="far fa-handshake"></i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,31 +28,31 @@
 
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'jpapp:users_detail' request.user.pk %}">{{ request.user.username }}</a>
+              <a class="nav-link" href="{% url 'jpapp:users_detail' request.user.pk %}"><i class="fas fa-user-circle"></i>{{ request.user.username }}</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'jpapp:companies_list' %}">企業一覧</a>
+              <a class="nav-link" href="{% url 'jpapp:companies_list' %}"><i class="far fa-building"></i>企業一覧</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'jpapp:tasks_list' %}">タスク一覧</a>
+              <a class="nav-link" href="{% url 'jpapp:tasks_list' %}"><i class="fas fa-tasks"></i>タスク一覧</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'jpapp:boards_list' %}">ボード一覧</a>
+              <a class="nav-link" href="{% url 'jpapp:boards_list' %}"><i class="fas fa-users"></i>ボード一覧</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+              <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>ログアウト</a>
             </li>
 
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+              <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>ログイン</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'jpapp:signup' %}">サインアップ</a>
+              <a class="nav-link" href="{% url 'jpapp:signup' %}"><i class="fas fa-user-plus"></i>サインアップ</a>
             </li>
             {% endif %}
           </ul>
