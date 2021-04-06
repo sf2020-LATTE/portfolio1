@@ -12,4 +12,7 @@ nav{
 .jumbotron{
   margin-top: 50px;
   background-color: #F2F2F2;
+  display:inline-block;
+  text-align:center;
+  width:100%;
 }
