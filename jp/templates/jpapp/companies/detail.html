@@ -9,7 +9,6 @@
   <!-- <dt class="col-sm-3">ユーザー名</dt>
   <dd class="col-sm-9">{{ company.user.username }}</dd> -->
 </dl>
-
 <a class="btn btn-primary" href="{% url 'jpapp:companies_update' company.pk  %}" role="button">編集</a>
 <a class="btn btn-danger" href="{% url 'jpapp:companies_delete' company.pk  %}" role="button">削除</a>
 {% endblock %}
