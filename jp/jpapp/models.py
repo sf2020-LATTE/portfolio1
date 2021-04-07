@@ -25,6 +25,7 @@ class Company(models.Model):
       choices = CHOICE,
       default='0'
     )
+    application_date = models.DateField(null=True)
 
     #ForeignKey は一対多を表現するリレーションシップ型
     #CASCADE ユーザー削除時に同時にリストも削除
