@@ -31,8 +31,9 @@
               <h4><span class="badge bg-light">{{ list.get_phase_display }}</span></h4>
             {% endif %}
             {% for interview in list.interview_set.all %}
-              <h5><a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="card m-3">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></h5>
+              <h4><span class="badge bg-light"><a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="card m-3">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></span></h4>
             {% endfor %}
+              <a href="{% url 'jpapp:interviews_create' %}" class="text-dark"><i class="far fa-plus-square"></i> さらにカードを追加</a>
           </div>
         </div>
         <div class="row">
