@@ -22,6 +22,8 @@ urlpatterns = [
     path("interviews/create/", views.InterviewCreateView.as_view(), name="interviews_create"),
     path("interviews/", views.InterviewListView.as_view(), name="interviews_list"),
     path("interviews/<int:pk>/", views.InterviewDetailView.as_view(), name="interviews_detail"),
+    path("interviews/<int:pk>/update/", views.InterviewUpdateView.as_view(), name="interviews_update"),
+    path("interviews/<int:pk>/delete/", views.InterviewDeleteView.as_view(), name="interviews_delete"),
     #Task
     path("tasks/create/", views.TaskCreateView.as_view(), name="tasks_create"),
     path("tasks/", views.TaskListView.as_view(), name="tasks_list"),

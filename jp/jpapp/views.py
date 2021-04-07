@@ -98,6 +98,20 @@ class InterviewDetailView(LoginRequiredMixin, DetailView):
     model = Interview
     template_name = "jpapp/interviews/detail.html"
 
+class InterviewUpdateView(LoginRequiredMixin, UpdateView):
+    model = Interview
+    template_name = "jpapp/interviews/update.html"
+    form_class = InterviewForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:interviews_detail', pk=self.kwargs['pk'])
+
+class InterviewDeleteView(LoginRequiredMixin, DeleteView):
+    model = Interview
+    template_name = "jpapp/interviews/delete.html"
+    form_class = InterviewForm
+    success_url = reverse_lazy("jpapp:interviews_list")
+
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     template_name = "jpapp/tasks/create.html"
