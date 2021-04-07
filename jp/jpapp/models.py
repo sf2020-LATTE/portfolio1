@@ -34,6 +34,24 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
+CHOICE = ((0, 'カジュアル面談'),
+          (1, '一次面接'),
+          (2, '二次面接'),
+          (3, '三次面接'))
+
+class Interview(models.Model):
+    interview_phase = models.IntegerField(
+      choices = CHOICE,
+      default='0'
+    )
+    interview_datetime = models.DateTimeField()
+    interview_description = models.TextField()
+    
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.interview_phase
+
 class Task(models.Model):
     task_title = models.CharField(max_length=100)
     task_memo = models.TextField()
