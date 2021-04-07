@@ -20,7 +20,8 @@ urlpatterns = [
     path("companies/<int:pk>/delete/", views.CompanyDeleteView.as_view(), name="companies_delete"),
     #Interview
     path("interviews/create/", views.InterviewCreateView.as_view(), name="interviews_create"),
-
+    path("interviews/", views.InterviewListView.as_view(), name="interviews_list"),
+    path("interviews/<int:pk>/", views.InterviewDetailView.as_view(), name="interviews_detail"),
     #Task
     path("tasks/create/", views.TaskCreateView.as_view(), name="tasks_create"),
     path("tasks/", views.TaskListView.as_view(), name="tasks_list"),

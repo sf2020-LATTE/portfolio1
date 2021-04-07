@@ -90,6 +90,14 @@ class InterviewCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+class InterviewListView(LoginRequiredMixin, ListView):
+    model = Interview
+    template_name = "jpapp/interviews/list.html"
+
+class InterviewDetailView(LoginRequiredMixin, DetailView):
+    model = Interview
+    template_name = "jpapp/interviews/detail.html"
+
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     template_name = "jpapp/tasks/create.html"
