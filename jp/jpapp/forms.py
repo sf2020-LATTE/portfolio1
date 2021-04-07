@@ -19,7 +19,7 @@ class InterviewForm(forms.ModelForm):
 
     class Meta:
         model = Interview
-        fields = ("interview_phase", "interview_datetime", "interview_description")
+        fields = ("company", "interview_phase", "interview_datetime", "interview_description")
 
 class TaskForm(forms.ModelForm):
 

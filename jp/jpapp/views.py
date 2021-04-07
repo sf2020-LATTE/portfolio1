@@ -7,8 +7,8 @@ from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm, TaskForm, BoardForm, CommentForm
-from . models import Company, Task, Board, Comment
+from .forms import UserForm, CompanyForm,InterviewForm, TaskForm, BoardForm, CommentForm
+from . models import Company,Interview, Task, Board, Comment
 from .mixins import OnlyYouMixin
 
 from django.template.loader import render_to_string
@@ -80,6 +80,15 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
     form_class = CompanyForm
     success_url = reverse_lazy("jpapp:companies_list")
 
+class InterviewCreateView(LoginRequiredMixin, CreateView):
+    model = Interview
+    template_name = "jpapp/interviews/create.html"
+    form_class = InterviewForm
+    success_url = reverse_lazy("jpapp:companies_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
