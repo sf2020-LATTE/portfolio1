@@ -13,7 +13,7 @@ class CompanyForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ("company_name","location", "capital","total_employee","establishd","description","phase")
+        fields = ("company_name","location", "capital","total_employee","establishd","description","phase","application_date")
 
 class TaskForm(forms.ModelForm):
 
