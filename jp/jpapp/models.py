@@ -46,9 +46,9 @@ class Interview(models.Model):
     )
     interview_datetime = models.DateTimeField()
     interview_description = models.TextField()
-    
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.interview_phase
 
