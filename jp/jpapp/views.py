@@ -84,7 +84,7 @@ class InterviewCreateView(LoginRequiredMixin, CreateView):
     model = Interview
     template_name = "jpapp/interviews/create.html"
     form_class = InterviewForm
-    success_url = reverse_lazy("jpapp:companies_list")
+    success_url = reverse_lazy("jpapp:interviews_list")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
