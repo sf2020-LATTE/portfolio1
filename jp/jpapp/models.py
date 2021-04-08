@@ -15,16 +15,16 @@ CHOICE1 = ((0, '書類選考'),
 
 class Company(models.Model):
     company_name = models.CharField(max_length=200)
-    url = models.URLField(null=True)
-    route = models.TextField(null=True)
-    business_form = models.TextField(null=True)
-    location = models.TextField(null=True)
-    description = models.TextField(null=True)
+    url = models.URLField(blank=True,null=True)
+    route = models.TextField(blank=True,null=True)
+    business_form = models.TextField(blank=True,null=True)
+    location = models.TextField(blank=True,null=True)
+    description = models.TextField(blank=True,null=True)
     phase = models.IntegerField(
       choices = CHOICE1,
       default='0'
     )
-    application_date = models.DateField(null=True)
+    application_date = models.DateField(blank=True,null=True)
 
     #ForeignKey は一対多を表現するリレーションシップ型
     #CASCADE ユーザー削除時に同時にリストも削除
