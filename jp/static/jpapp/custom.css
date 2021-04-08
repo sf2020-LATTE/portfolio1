@@ -16,3 +16,8 @@ nav{
   text-align:center;
   width:100%;
 }
+
+div.field-a {
+  margin-top: 30px;
+  list-style: none;
+}
