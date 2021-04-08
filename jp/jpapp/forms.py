@@ -23,10 +23,9 @@ class CompanyForm(forms.ModelForm):
             (8, "沖縄"),
         ),
     )
-
     class Meta:
         model = Company
-        fields = ("company_name","location", "capital","total_employee","establishd","description","phase","application_date")
+        fields = ("company_name","location","description","phase","application_date")
 
 class InterviewForm(forms.ModelForm):
 

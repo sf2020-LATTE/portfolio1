@@ -15,13 +15,12 @@ CHOICE1 = ((0, '書類選考'),
 
 class Company(models.Model):
     company_name = models.CharField(max_length=200)
-    location = models.TextField()
-    capital = models.IntegerField()
-    total_employee = models.IntegerField()
-    establishd = models.DateField(null=True)
-    description = models.TextField()
+    url = models.URLField(null=True)
+    route = models.TextField(null=True)
+    business_form = models.TextField(null=True)
+    location = models.TextField(null=True)
+    description = models.TextField(null=True)
     phase = models.IntegerField(
-      # max_length = 50,
       choices = CHOICE1,
       default='0'
     )
