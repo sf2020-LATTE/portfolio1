@@ -16,9 +16,9 @@ CHOICE1 = ((0, '書類選考'),
 class Company(models.Model):
     company_name = models.CharField(max_length=200)
     url = models.URLField(blank=True,null=True)
-    route = models.TextField(blank=True,null=True)
-    business_form = models.TextField(blank=True,null=True)
-    location = models.TextField(blank=True,null=True)
+    route = models.IntegerField(blank=True,null=True)
+    business_form = models.IntegerField(blank=True,null=True)
+    location = models.IntegerField(blank=True,null=True)
     description = models.TextField(blank=True,null=True)
     phase = models.IntegerField(
       choices = CHOICE1,
