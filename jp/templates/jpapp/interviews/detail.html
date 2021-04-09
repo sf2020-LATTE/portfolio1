@@ -1,0 +1,14 @@
+{% extends "jpapp/base.html" %}
+
+{% block content %}
+
+<h1>カード詳細</h1>
+<dl class="row">
+  <dt class="col-sm-3">タイトル</dt>
+  <dd class="col-sm-9">{{ interview.interview_phase }}</dd>
+</dl>
+
+<a class="btn btn-primary" href="{% url 'jpapp:interviews_update' interview.pk  %}" role="button">編集</a>
+<a class="btn btn-danger" href="{% url 'jpapp:interviews_delete' interview.pk  %}" role="button">削除</a>
+
+{% endblock %}

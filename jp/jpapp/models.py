@@ -4,7 +4,7 @@ from django.db import models
 import datetime
 from django.utils import timezone
 
-CHOICE = ((0, '書類選考'),
+CHOICE1 = ((0, '書類選考'),
           (1, 'カジュアル面談'),
           (2, '一次面接'),
           (3, '二次面接'),
@@ -14,17 +14,17 @@ CHOICE = ((0, '書類選考'),
           (7, 'お見送り'))
 
 class Company(models.Model):
-    company_name = models.CharField(max_length=200)
-    location = models.TextField()
-    capital = models.IntegerField()
-    total_employee = models.IntegerField()
-    establishd = models.DateField(null=True)
-    description = models.TextField()
+    company_name = models.CharField(max_length=200,)
+    url = models.URLField(blank=True,null=True,)
+    route = models.TextField(blank=True,null=True,)
+    business_form = models.TextField(blank=True,null=True,)
+    location = models.TextField(blank=True,null=True,)
+    description = models.TextField(blank=True,null=True,)
     phase = models.IntegerField(
-      # max_length = 50,
-      choices = CHOICE,
-      default='0'
+      choices = CHOICE1,
+      default='0',
     )
+    application_date = models.DateField(blank=True,null=True,)
 
     #ForeignKey は一対多を表現するリレーションシップ型
     #CASCADE ユーザー削除時に同時にリストも削除
@@ -32,6 +32,24 @@ class Company(models.Model):
 
     def __str__(self):
         return self.company_name
+
+CHOICE2 = ((0, 'カジュアル面談'),
+          (1, '一次面接'),
+          (2, '二次面接'),
+          (3, '三次面接'))
+
+class Interview(models.Model):
+    interview_phase = models.IntegerField(
+      choices = CHOICE2,
+      default='0'
+    )
+    interview_datetime = models.DateTimeField()
+    interview_description = models.TextField()
+
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.interview_phase
 
 class Task(models.Model):
     task_title = models.CharField(max_length=100)

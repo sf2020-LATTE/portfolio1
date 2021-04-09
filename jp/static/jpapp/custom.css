@@ -1,10 +1,6 @@
 body{
   background-color: #F2F2F2;
 }
-nav{
-  background-color: navy;
-}
-
 .main-image{
   margin-bottom: 50px;
 }
@@ -15,4 +11,21 @@ nav{
   display:inline-block;
   text-align:center;
   width:100%;
+}
+
+
+/* チェックボックス */
+#id_location li{
+  display: inline-block;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  border: solid 1px #ccc;
+  transition: 0.25s;
+  padding: 6px 18px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 3px;
+  background: #00809d;
+  color: #fff;
 }

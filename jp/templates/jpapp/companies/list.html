@@ -5,44 +5,32 @@
   <h1>リスト一覧</h1>
   <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button">作成</a> 
 
-  <div class="row">
-    <div class="col-8 bgred">
-      <p>企業情報</p>
-    </div>
-    <div class="col-4 bgblue">
-      <p>選考フェーズ</p>
-    </div>
-  </div>
+  <div class="card-columns">
     {% for list in company_list %}
-    <div class="alert alert-success" role="alert">
-      <div class="container">
-        <div class="row">
-          <div class="col-8">
-            <h3><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a></h3>
-          </div>
-          <div class="col-4">
-            {% if list.phase == 7 %}
-              <h4><span class="badge bg-secondary">{{ list.get_phase_display }}</span></h4>
-            {% elif list.phase == 6 %}
-              <h4><span class="badge bg-danger">{{ list.get_phase_display }}</span></h4>
-            {% elif list.phase == 7 %}
-              <h4><span class="badge bg-info">{{ list.get_phase_display }}</span></h4>
-            {% else %}
-              <h4><span class="badge bg-light">{{ list.get_phase_display }}</span></h4>
-            {% endif %}
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <p>場所:{{ list.location }}</p>
-            <p>資本金:{{ list.capital }}</p>
-            <p>従業員:{{ list.total_employee }}</p>
-            <p>設立:{{ list.establishd }}</p>
-          </div>
-        </div>
+    <div class="card border-dark mb-3" style="max-width: 18rem;">
+      <div class="card-header">
+        {% if list.phase == 7 %}
+        <h4><span class="badge bg-secondary">{{ list.get_phase_display }}</span></h4>
+        {% elif list.phase == 6 %}
+          <h4><span class="badge bg-danger">{{ list.get_phase_display }}</span></h4>
+        {% elif list.phase == 7 %}
+          <h4><span class="badge bg-info">{{ list.get_phase_display }}</span></h4>
+        {% else %}
+          <h4><span class="badge bg-light">{{ list.get_phase_display }}</span></h4>
+        {% endif %}
+      </div>
+      <div class="card-body text-dark">
+        <h5 class="card-title"><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a></h5>
+        <p class="card-text">
+          {{ list.url }}
+        </p>
+        <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
+        {% for interview in list.interview_set.all %}
+        <p class="card-text"><a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="card m-3">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
+        {% endfor %} 
       </div>
     </div>
-    {% endfor %}  
-  </a>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}
