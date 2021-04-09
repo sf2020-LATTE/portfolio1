@@ -14,8 +14,9 @@
       {% elif list.phase == 7 %}
         <span class="badge bg-info">{{ list.get_phase_display }}</span>
       {% else %}
-        <span class="badge bg-light">{{ list.get_phase_display }}</span>
+        <span class="badge bg-light">{{ list.get_phase_display }}</span> 
       {% endif %}
+      応募日：{{ list.application_date|default_if_none:" " }}
     </div>
     <div class="card-body">
       <h5><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a></h5>
@@ -24,11 +25,10 @@
       </p>
       <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
       {% for interview in list.interview_set.all %}
-      <p class="card-text"><a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="card m-3">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
+      <p class="card-text"><a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
       {% endfor %} 
     </div>
   </div>
-  {% endfor %}
-  </div>
+  {% endfor %} 
 </div>
 {% endblock %}
