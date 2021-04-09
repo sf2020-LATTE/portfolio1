@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
   <h1>リスト一覧</h1>
-  <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button">作成</a> 
+  <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a> 
   {% for list in company_list %}
   <div class="card w-100">
     <div class="card-header">
@@ -19,14 +19,16 @@
       応募日：{{ list.application_date|default_if_none:" " }}
     </div>
     <div class="card-body">
-      <h5><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a></h5>
+      <h5><a href="{% url 'jpapp:companies_detail'  list.pk %}" >{{ list.company_name }}</a></h5>
       <p class="card-text">
         {{ list.url }}
       </p>
       <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
       {% for interview in list.interview_set.all %}
-      <p class="card-text"><a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
-      {% endfor %} 
+      <a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a>
+      {% endfor %}
+
+      <a href="{% url 'jpapp:interviews_create' %}"><i class="far fa-calendar-alt"></i></a>
     </div>
   </div>
   {% endfor %} 
