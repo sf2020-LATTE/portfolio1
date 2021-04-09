@@ -2,10 +2,10 @@
 
 {% block content %}
 <div class="container">
-  <h1>リスト一覧</h1>
   <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a> 
+  <div class="container">
   {% for list in company_list %}
-  <div class="card w-100">
+  <div class="card">
     <div class="card-header">
       {% if list.phase == 7 %}
         <span class="badge bg-secondary">{{ list.get_phase_display }}</span>
@@ -27,7 +27,6 @@
       {% for interview in list.interview_set.all %}
       <a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a>
       {% endfor %}
-
       <a href="{% url 'jpapp:interviews_create' %}"><i class="far fa-calendar-alt"></i></a>
     </div>
   </div>
