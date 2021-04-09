@@ -21,10 +21,10 @@
       </div>
       <div class="card-body text-dark">
         <h5 class="card-title"><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a></h5>
-        <p class="card-text">{{ list.url }}</p>
-        <p class="card-text">{{ list.get_route_display }}</p>
-        <p class="card-text">{{ list.business_form }}</p>
-        <p class="card-text">{{ list.location }}</p>
+        <p class="card-text">
+          {{ list.url }}
+        </p>
+        <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
         {% for interview in list.interview_set.all %}
         <p class="card-text"><a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="card m-3">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
         {% endfor %} 

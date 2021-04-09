@@ -14,17 +14,17 @@ CHOICE1 = ((0, '書類選考'),
           (7, 'お見送り'))
 
 class Company(models.Model):
-    company_name = models.CharField(max_length=200)
-    url = models.URLField(blank=True,null=True)
-    route = models.IntegerField(blank=True,null=True)
-    business_form = models.IntegerField(blank=True,null=True)
-    location = models.IntegerField(blank=True,null=True)
-    description = models.TextField(blank=True,null=True)
+    company_name = models.CharField(max_length=200,)
+    url = models.URLField(blank=True,null=True,)
+    route = models.TextField(blank=True,null=True,)
+    business_form = models.TextField(blank=True,null=True,)
+    location = models.TextField(blank=True,null=True,)
+    description = models.TextField(blank=True,null=True,)
     phase = models.IntegerField(
       choices = CHOICE1,
-      default='0'
+      default='0',
     )
-    application_date = models.DateField(blank=True,null=True)
+    application_date = models.DateField(blank=True,null=True,)
 
     #ForeignKey は一対多を表現するリレーションシップ型
     #CASCADE ユーザー削除時に同時にリストも削除

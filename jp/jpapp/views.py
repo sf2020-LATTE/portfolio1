@@ -62,6 +62,7 @@ class CompanyListView(LoginRequiredMixin, ListView):
     model = Company
     template_name = "jpapp/companies/list.html"
 
+
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     model = Company
     template_name = "jpapp/companies/detail.html"
