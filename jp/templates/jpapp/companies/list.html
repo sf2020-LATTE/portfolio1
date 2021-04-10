@@ -5,29 +5,35 @@
   <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a> 
   <div class="container">
   {% for list in company_list %}
-  <div class="card">
-    <div class="card-header">
-      {% if list.phase == 7 %}
-        <span class="badge bg-secondary">{{ list.get_phase_display }}</span>
-      {% elif list.phase == 6 %}
-        <span class="badge bg-danger">{{ list.get_phase_display }}</span>
-      {% elif list.phase == 7 %}
-        <span class="badge bg-info">{{ list.get_phase_display }}</span>
-      {% else %}
-        <span class="badge bg-light">{{ list.get_phase_display }}</span> 
-      {% endif %}
-      応募日：{{ list.application_date|default_if_none:" " }}
-    </div>
-    <div class="card-body">
-      <h5><a href="{% url 'jpapp:companies_detail'  list.pk %}" >{{ list.company_name }}</a></h5>
-      <p class="card-text">
-        {{ list.url }}
-      </p>
-      <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
-      {% for interview in list.interview_set.all %}
-      <a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a>
-      {% endfor %}
-      <a href="{% url 'jpapp:interviews_create' %}"><i class="far fa-calendar-alt"></i></a>
+  <div class="alert alert-success" role="alert">
+    <div class="row">
+      <div class="card" style="width: 40rem;">
+        <div class="card-body">
+          {% if list.phase == 7 %}
+            <p class="text-secondary">{{ list.get_phase_display }}</p>
+          {% elif list.phase == 6 %}
+            <p class="text-danger">{{ list.get_phase_display }}</p>
+          {% elif list.phase == 7 %}
+            <p class="text-info">{{ list.get_phase_display }}</p>
+          {% else %}
+            <p class="text-secondary">{{ list.get_phase_display }}</p> 
+          {% endif %}
+          応募日：{{ list.application_date|default_if_none:" " }}
+          <h5><a href="{% url 'jpapp:companies_detail'  list.pk %}" >{{ list.company_name }}</a></h5>
+          <p class="card-text">
+            {{ list.url }}
+          </p>
+          <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
+        </div>
+      </div>
+      <div class="card" style="width:  20rem;">
+        <div class="card-body">
+        <p><a href="{% url 'jpapp:interviews_create' %}" class="link-secondary"><i class="far fa-calendar-alt"></i></a></p>
+        {% for interview in list.interview_set.all %}
+        <p><a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
+        {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
   {% endfor %} 
