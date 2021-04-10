@@ -5,8 +5,8 @@
   <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a> 
   <div class="container">
   {% for list in company_list %}
-  <div class="card w-75 rounded-0">
-    <div class="card-body">
+  <div class="alert alert-light border-top rounded-0">
+    <div>
       {% if list.phase == 7 %}
         <p class="text-secondary">{{ list.get_phase_display }}</p>
       {% elif list.phase == 6 %}
@@ -17,11 +17,11 @@
         <p class="text-secondary">{{ list.get_phase_display }}</p> 
       {% endif %}
       応募日：{{ list.application_date|default_if_none:" " }}
-      <h5><a href="{% url 'jpapp:companies_detail'  list.pk %}" >{{ list.company_name }}</a></h5>
-      <p class="card-text">
+      <h4><a href="{% url 'jpapp:companies_detail'  list.pk %}" >{{ list.company_name }}</a></h4>
+      <p>
         {{ list.url }}
       </p>
-      <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
+      <p>{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
       <p><a href="{% url 'jpapp:interviews_create' %}" class="link-secondary"><i class="far fa-calendar-alt"></i></a></p>
       {% for interview in list.interview_set.all %}
       <p><a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
