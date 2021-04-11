@@ -2,35 +2,42 @@
 
 {% block content %}
 <div class="container">
-  <h1>リスト一覧</h1>
-  <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button">作成</a> 
-
-  <div class="card-columns">
-    {% for list in company_list %}
-    <div class="card border-dark mb-3" style="max-width: 18rem;">
-      <div class="card-header">
-        {% if list.phase == 7 %}
-        <h4><span class="badge bg-secondary">{{ list.get_phase_display }}</span></h4>
-        {% elif list.phase == 6 %}
-          <h4><span class="badge bg-danger">{{ list.get_phase_display }}</span></h4>
-        {% elif list.phase == 7 %}
-          <h4><span class="badge bg-info">{{ list.get_phase_display }}</span></h4>
-        {% else %}
-          <h4><span class="badge bg-light">{{ list.get_phase_display }}</span></h4>
-        {% endif %}
-      </div>
-      <div class="card-body text-dark">
-        <h5 class="card-title"><a href="{% url 'jpapp:companies_detail' list.pk %}">{{ list.company_name }}</a></h5>
-        <p class="card-text">
-          {{ list.url }}
-        </p>
-        <p class="card-text">{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
+  <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a> 
+  <div class="container">
+  {% for list in company_list %}
+  <div class="alert alert-light border-top rounded-0" role="alert">
+    <div class="row">
+      <div class="col-sm-4 border-right">
+        <a href="{% url 'jpapp:interviews_create' %}"><i class="far fa-calendar-alt"></i></a><br>
+        応募日：{{ list.application_date|default_if_none:" " }}<br>
         {% for interview in list.interview_set.all %}
-        <p class="card-text"><a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="card m-3">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
-        {% endfor %} 
+        <a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="alert-link">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a><br>
+        {% endfor %}
+      </div>
+      <div class="col-sm-8">
+        <div class="company_title">
+          <div>
+            <h4><a href="{% url 'jpapp:companies_detail'  list.pk %}" class="alert-link">{{ list.company_name }}</a></h4>
+          </div>
+          <div>
+            {% if list.phase == 7 %}
+            <span class="badge bg-dark">{{ list.get_phase_display }}</span>
+            {% elif list.phase == 6 %}
+            <span class="badge bg-danger">{{ list.get_phase_display }}</span>
+            {% elif list.phase == 0 %}
+            <span class="badge bg-info">{{ list.get_phase_display }}</span>
+            {% else %}
+            <span class="badge bg-success">{{ list.get_phase_display }}</span> 
+            {% endif %}
+          </div>
+        </div>
+        <div>
+          <p>{{ list.url }}</p>
+          <p>{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
+        </div>
       </div>
     </div>
-    {% endfor %}
   </div>
+  {% endfor %} 
 </div>
 {% endblock %}

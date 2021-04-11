@@ -1,5 +1,6 @@
 body{
   background-color: #F2F2F2;
+  
 }
 .main-image{
   margin-bottom: 50px;
@@ -12,7 +13,19 @@ body{
   text-align:center;
   width:100%;
 }
+.alert{
+  margin-bottom: 0rem;
+}
 
+.badge{
+  color: #F2F2F2;
+}
+
+.company_title{
+  width:x;
+  display: flex;
+  justify-content: space-between;
+}
 
 /* チェックボックス */
 #id_location li{
