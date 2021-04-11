@@ -6,7 +6,8 @@
   <div class="container">
   {% for list in company_list %}
   <div class="alert alert-light border-top rounded-0" role="alert">
-    <div>
+    <div class="row">
+      <div class="col-sm-4">
       {% if list.phase == 7 %}
         <p class="text-secondary">{{ list.get_phase_display }}</p>
       {% elif list.phase == 6 %}
@@ -17,15 +18,19 @@
         <p class="text-secondary">{{ list.get_phase_display }}</p> 
       {% endif %}
       応募日：{{ list.application_date|default_if_none:" " }}
+      {% for interview in list.interview_set.all %}
+      <p><a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
+      {% endfor %}
+      </div>
+      <div class="col-sm-8">
       <h4><a href="{% url 'jpapp:companies_detail'  list.pk %}" >{{ list.company_name }}</a></h4>
       <p>
         {{ list.url }}
       </p>
       <p>{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
       <p><a href="{% url 'jpapp:interviews_create' %}" class="link-secondary"><i class="far fa-calendar-alt"></i></a></p>
-      {% for interview in list.interview_set.all %}
-      <p><a href="{% url 'jpapp:interviews_detail' interview.pk %}">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a></p>
-      {% endfor %}
+
+      </div>
     </div>
   </div>
   {% endfor %} 
