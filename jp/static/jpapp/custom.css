@@ -13,7 +13,9 @@ body{
   text-align:center;
   width:100%;
 }
-
+.alert{
+  margin-bottom: 0rem;
+}
 
 /* チェックボックス */
 #id_location li{
