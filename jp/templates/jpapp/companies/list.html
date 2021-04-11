@@ -8,24 +8,28 @@
   <div class="alert alert-light border-top rounded-0" role="alert">
     <div class="row">
       <div class="col-sm-4 border-right">
-      <a href="{% url 'jpapp:interviews_create' %}"><i class="far fa-calendar-alt"></i></a><br>
-      応募日：{{ list.application_date|default_if_none:" " }}<br>
-      {% for interview in list.interview_set.all %}
-      <a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="alert-link">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a><br>
-      {% endfor %}
+        <a href="{% url 'jpapp:interviews_create' %}"><i class="far fa-calendar-alt"></i></a><br>
+        応募日：{{ list.application_date|default_if_none:" " }}<br>
+        {% for interview in list.interview_set.all %}
+        <a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="alert-link">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a><br>
+        {% endfor %}
       </div>
       <div class="col-sm-8">
-        <div>
-          <h4><a href="{% url 'jpapp:companies_detail'  list.pk %}" class="alert-link">{{ list.company_name }}</a></h4>
-          {% if list.phase == 7 %}
-          <p class="text-secondary">{{ list.get_phase_display }}</p>
-          {% elif list.phase == 6 %}
-            <p class="text-danger">{{ list.get_phase_display }}</p>
-          {% elif list.phase == 7 %}
-            <p class="text-info">{{ list.get_phase_display }}</p>
-          {% else %}
-            <p class="text-secondary">{{ list.get_phase_display }}</p> 
-          {% endif %}
+        <div class="company_title">
+          <div>
+            <h4><a href="{% url 'jpapp:companies_detail'  list.pk %}" class="alert-link">{{ list.company_name }}</a></h4>
+          </div>
+          <div>
+            {% if list.phase == 7 %}
+            <span class="badge bg-secondary">{{ list.get_phase_display }}</span>
+            {% elif list.phase == 6 %}
+            <span class="badge bg-danger">{{ list.get_phase_display }}</span>
+            {% elif list.phase == 7 %}
+            <span class="badge bg-info">{{ list.get_phase_display }}</span>
+            {% else %}
+            <span class="badge bg-dark">{{ list.get_phase_display }}</span> 
+            {% endif %}
+          </div>
         </div>
         <div>
           <p>{{ list.url }}</p>
