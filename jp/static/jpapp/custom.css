@@ -17,6 +17,10 @@ body{
   margin-bottom: 0rem;
 }
 
+.badge{
+  color: #F2F2F2;
+}
+
 .company_title{
   width:x;
   display: flex;
