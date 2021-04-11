@@ -7,7 +7,7 @@
   {% for list in company_list %}
   <div class="alert alert-light border-top rounded-0" role="alert">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-4 border-right">
       {% if list.phase == 7 %}
         <p class="text-secondary">{{ list.get_phase_display }}</p>
       {% elif list.phase == 6 %}
@@ -29,7 +29,6 @@
       </p>
       <p>{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
       <p><a href="{% url 'jpapp:interviews_create' %}" class="link-secondary"><i class="far fa-calendar-alt"></i></a></p>
-
       </div>
     </div>
   </div>
