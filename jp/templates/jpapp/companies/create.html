@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-  <h1>Compnayリスト作成</h1>
+  <h1>企業情報の登録</h1>
   <form action="" method="POST" class="form-group">
     {{ form.non_field_errors }}
     <div class="field">
@@ -15,7 +15,7 @@
       <label for="{{ id_url }}">URL</label>
       {{ form.url }}
       <span class="helptext">{{ form.url.help_text }}</span>
-      {{ form.url.errors }}
+      {{ form.url.errrs }}
     </div>
     <div class="field">
       <label for="{{ id_route }}">応募経路</label>
