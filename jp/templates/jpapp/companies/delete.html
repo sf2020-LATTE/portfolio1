@@ -1,10 +1,12 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
-<h1>リスト削除</h1>
-<form method="post">
-  {% csrf_token %}
-  <p>リスト "{{ company.company_name }}" を本当に削除してもよろしいですか？</p>
-  <button type="submit" class="btn btn-danger">確認</button>
-</form>
+<div class="container">
+<h1>企業情報の削除</h1>
+  <form method="post">
+    {% csrf_token %}
+    <p>"{{ company.company_name }}" の情報を本当に削除してもよろしいですか？</p>
+    <button type="submit" class="btn btn-danger">確認</button>
+  </form>
+</div>
 {% endblock %}
