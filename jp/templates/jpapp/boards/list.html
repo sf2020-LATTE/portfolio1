@@ -1,20 +1,20 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
-
-<div class="alert alert-primary" role="alert">
-    <h3>掲示板</h3>
-</div>
-
 <div class="container">
-  {% for item in object_list %}
-  <div class="alert alert-success" role="alert">
-    <p>タイトル:<a href="{% url 'jpapp:boards_detail' item.pk %}">{{ item.board_title }}</a></p>
-    <p>内容:{{ item.board_content }}</p>
-    <p>投稿者:{{ item.user }}</p>
-    <a href="{% url 'jpapp:boards_update' item.pk %}" class="btn btn-primary" role="button" aria-pressed="true">編集</a>
-    <a href="{% url 'jpapp:boards_delete' item.pk %}" class="btn btn-secondary" role="button" aria-pressed="true">削除</a>
+  <a class="btn btn-primary my-3" href="{% url 'jpapp:boards_create' %}" role="button"><i class="far fa-edit"></i>掲示板を作成</a> 
+  <div class="container">
+    {% for item in object_list %}
+    <div class="card bg-light mb-3" style="max-width: 50rem;">
+      <div class="card-body">
+        <h5 class="card-title">タイトル:<a href="{% url 'jpapp:boards_detail' item.pk %}">{{ item.board_title }}</a></h5>
+        <p class="card-text">内容:{{ item.board_content }}</p>
+        <p>投稿者:{{ item.user }}</p>
+        <a href="{% url 'jpapp:boards_update' item.pk %}" class="btn btn-primary" role="button" aria-pressed="true">編集</a>
+        <a href="{% url 'jpapp:boards_delete' item.pk %}" class="btn btn-secondary" role="button" aria-pressed="true">削除</a>
+      </div>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 {% endblock %}
