@@ -1,14 +1,27 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
-
+<div class="container">
 <h1>リスト詳細</h1>
-<dl class="row">
-  <dt class="col-sm-3">タイトル</dt>
-  <dd class="col-sm-9">{{ company.company_name }}</dd>
-  <!-- <dt class="col-sm-3">ユーザー名</dt>
-  <dd class="col-sm-9">{{ company.user.username }}</dd> -->
-</dl>
-<a class="btn btn-primary" href="{% url 'jpapp:companies_update' company.pk  %}" role="button">編集</a>
-<a class="btn btn-danger" href="{% url 'jpapp:companies_delete' company.pk  %}" role="button">削除</a>
+  <dl class="row">
+    <dt class="col-sm-3">タイトル</dt>
+    <dd class="col-sm-9">{{ company.company_name }}</dd>
+    <dt class="col-sm-3">URL</dt>
+    <dd class="col-sm-9">{{ company.url }}</dd>
+    <dt class="col-sm-3">応募経路</dt>
+    <dd class="col-sm-9">{{ company.route }}</dd>
+    <dt class="col-sm-3">業務形態</dt>
+    <dd class="col-sm-9">{{ company.business_form }}</dd>
+    <dt class="col-sm-3">勤務地</dt>
+    <dd class="col-sm-9">{{ company.location }}</dd>
+    <dt class="col-sm-3">詳細</dt>
+    <dd class="col-sm-9">{{ company.description }}</dd>
+    <dt class="col-sm-3">選考フェーズ</dt>
+    <dd class="col-sm-9">{{ company.get_phase_display }}</dd>
+    <dt class="col-sm-3">応募日</dt>
+    <dd class="col-sm-9">{{ company.application_date }}</dd>
+  </dl>
+  <a class="btn btn-primary" href="{% url 'jpapp:companies_update' company.pk  %}" role="button">編集</a>
+  <a class="btn btn-danger" href="{% url 'jpapp:companies_delete' company.pk  %}" role="button">削除</a>
+</div>
 {% endblock %}
