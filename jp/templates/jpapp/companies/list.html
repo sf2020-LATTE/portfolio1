@@ -32,7 +32,7 @@
           </div>
         </div>
         <div>
-          <p>{{ list.url }}</p>
+          <p>{{ list.url|default_if_none:" "  }}</p>
           <p>{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
         </div>
       </div>

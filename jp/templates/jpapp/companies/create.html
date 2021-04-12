@@ -2,11 +2,58 @@
 
 {% block content %}
 <div class="container">
-  <h1>Compnayリスト作成</h1>
-  <form method="post">
+  <h1>企業情報の登録</h1>
+  <form action="" method="POST" class="form-group">
+    {{ form.non_field_errors }}
+    <div class="field">
+      <label for="{{ id_company_name }}">企業名</label>
+      {{ form.company_name }}
+      <span class="helptext">{{ form.company_name.help_text }}</span>
+      {{ form.company_name.errors }}
+    </div>
+    <div class="field">
+      <label for="{{ id_url }}">URL</label>
+      {{ form.url }}
+      <span class="helptext">{{ form.url.help_text }}</span>
+      {{ form.url.errrs }}
+    </div>
+    <div class="field">
+      <label for="{{ id_route }}">応募経路</label>
+      {{ form.route }}
+      <span class="helptext">{{ form.route.help_text }}</span>
+      {{ form.route.errors }}
+    </div>
+    <div class="field">
+      <label for="{{ id_business_form }}">業務形態</label>
+      {{ form.business_form }}
+      <span class="helptext">{{ form.business_form.help_text }}</span>
+      {{ form.business_form.errors }}
+    </div>
+    <div class="field">
+      <label for="{{ id_location }}">勤務地</label>
+        {{ form.location }}
+        <span class="helptext">{{ form.location.help_text }}</span>
+        {{ form.location.errors }}
+    </div>
+    <div class="field">
+      <label for="{{ id_description }}">詳細</label>
+        {{ form.description }}
+        {{ form.description.errors }}
+    </div>
+    <div class="field">
+      <label for="{{ id_phase }}">選考フェーズ</label>
+        {{ form.phase }}
+        {{ form.phase.errors }}
+    </div>
+    <div class="field">
+      <label for="{{ id_application_date }}">応募日</label>
+        {{ form.application_date }}
+        {{ form.application_date.errors }}
+    </div>
+    <div class="field">
+      <button type="submit" class="btn btn-primary">送信</button>
+    </div>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">送信</button>
   </form>
 </div>
 {% endblock %}
