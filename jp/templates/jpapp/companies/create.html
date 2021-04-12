@@ -5,12 +5,8 @@
   <h1>Compnayリスト作成</h1>
   <form action="" method="POST" class="form-group">
     {{ form.non_field_errors }}
-    <div class="form-group">
-      <label for="{{ form.company_name }}">Example label</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-    </div>
     <div class="field">
-      {{ form.company_name.label_tag }}
+      <label for="{{ id_company_name }}">企業名</label>
       {{ form.company_name }}
       <span class="helptext">{{ form.company_name.help_text }}</span>
       {{ form.company_name.errors }}
