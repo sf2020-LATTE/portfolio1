@@ -1,19 +1,18 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
-
-<div class="alert alert-primary" role="alert">
-    <h3>詳細ページ</h3>
-</div>
-<a href="{% url 'jpapp:boards_list' %}">ボード一覧へ戻る</a>
 <div class="container">
-  <div class="alert alert-success" role="alert">
-    <p>タイトル:{{ board.board_title }}</p>
-    <p>内容:{{ board.board_content }}</p>
-    <p>投稿者:{{ board.user }}</p>
+  <h3>詳細ページ</h3>
+  <a href="{% url 'jpapp:boards_list' %}">ボード一覧へ戻る</a>
+  <div class="card bg-light mb-3" style="max-width: 50rem;">
+    <div class="card-body">
+      <h5 class="card-title">タイトル:{{ board.board_title }}</h5>
+      <p class="card-text">内容:{{ board.board_content }}</p>
+      <p>投稿者:{{ board.user }}</p>
+    </div>
   </div>
   <div class="main-comment-section">
     {% include 'jpapp/comment.html' %}
-   </div>
+  </div>
 </div>
 {% endblock %}
