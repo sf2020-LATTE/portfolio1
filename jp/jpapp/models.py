@@ -4,7 +4,27 @@ from django.db import models
 import datetime
 from django.utils import timezone
 
-CHOICE1 = ((0, '書類選考'),
+
+CHOICE1 = ((0, "スクール"),
+            (1, "wantedly"),
+            (2, "GREEN"),
+            (3, "リクナビ"),
+            (4, "マイナビ転職"),
+            (5, "doda"),
+            (6, "直応募"),
+            (7, "その他"),)
+
+CHOICE2 = ((0, "北海道"),
+            (1, "東北"),
+            (2, "関東"),
+            (3, "中部"),
+            (4, "近畿"),
+            (5, "中国"),
+            (6, "四国"),
+            (7, "九州"),
+            (8, "沖縄"),)
+
+CHOICE3 = ((0, '書類選考'),
           (1, 'カジュアル面談'),
           (2, '一次面接'),
           (3, '二次面接'),
@@ -12,17 +32,25 @@ CHOICE1 = ((0, '書類選考'),
           (5, '四次面接'),
           (6, '内定'),
           (7, 'お見送り'))
-
+          
 class Company(models.Model):
     company_name = models.CharField(max_length=200,)
     url = models.URLField(blank=True,null=True,)
-    route = models.CharField(max_length=200,blank=True,null=True,)
+    route = models.IntegerField(
+        choices = CHOICE1,
+        blank=True,
+        null=True,
+    )
     business_form = models.TextField(blank=True,null=True,)
-    location = models.TextField(blank=True,null=True,)
+    location = models.IntegerField(
+        choices = CHOICE2,
+        blank=True,
+        null=True,
+    )
     description = models.TextField(blank=True,null=True,)
     phase = models.IntegerField(
-      choices = CHOICE1,
-      default='0',
+        choices = CHOICE3,
+        default='0',
     )
     application_date = models.DateField(blank=True,null=True,)
 
@@ -33,14 +61,14 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
-CHOICE2 = ((0, 'カジュアル面談'),
+CHOICE4 = ((0, 'カジュアル面談'),
           (1, '一次面接'),
           (2, '二次面接'),
           (3, '三次面接'))
 
 class Interview(models.Model):
     interview_phase = models.IntegerField(
-      choices = CHOICE2,
+      choices = CHOICE4,
       default='0'
     )
     interview_datetime = models.DateTimeField()
