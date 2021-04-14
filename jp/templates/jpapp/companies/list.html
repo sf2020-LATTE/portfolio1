@@ -33,7 +33,7 @@
         </div>
         <div>
           <p>{{ list.url|default_if_none:" "  }}</p>
-          <p>{{ list.route }}{{ list.business_form }}{{ list.location }}</p>
+          <p>{{ list.get_route_display }}{{ list.business_form }}{{ list.get_location_display }}</p>
         </div>
       </div>
     </div>
