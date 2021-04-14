@@ -5,6 +5,12 @@ import datetime
 from django.utils import timezone
 
 
+class Tag(models.Model):
+    tag_name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
+
 CHOICE1 = ((0, "スクール"),
             (1, "wantedly"),
             (2, "GREEN"),
@@ -41,7 +47,7 @@ class Company(models.Model):
         blank=True,
         null=True,
     )
-    business_form = models.ManyToManyField(blank=True,null=True,)
+    business_form = models.CharField(max_length=32,blank=True,null=True,)
 
     location = models.IntegerField(
         choices = CHOICE2,
@@ -113,8 +119,3 @@ class Comment(models.Model):
    def __str__(self):
        return self.text
 
-class Tag(models.Model):
-    tag_name = models.CharField(max_length=32)
-
-    def __str__(self):
-        return self.name
