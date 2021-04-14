@@ -41,12 +41,15 @@ class Company(models.Model):
         blank=True,
         null=True,
     )
-    business_form = models.TextField(blank=True,null=True,)
+    business_form = models.ManyToManyField(blank=True,null=True,)
+
     location = models.IntegerField(
         choices = CHOICE2,
         blank=True,
         null=True,
     )
+    tags = models.ManyToManyField(Tag, blank=True)
+
     description = models.TextField(blank=True,null=True,)
     phase = models.IntegerField(
         choices = CHOICE3,
@@ -109,3 +112,9 @@ class Comment(models.Model):
    created_at = models.DateTimeField('投稿日', default=timezone.now)
    def __str__(self):
        return self.text
+
+class Tag(models.Model):
+    tag_name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
