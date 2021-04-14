@@ -9,7 +9,7 @@ class Tag(models.Model):
     tag_name = models.CharField(max_length=32)
 
     def __str__(self):
-        return self.name
+        return self.tag_name
 
 CHOICE1 = ((0, "スクール"),
             (1, "wantedly"),
