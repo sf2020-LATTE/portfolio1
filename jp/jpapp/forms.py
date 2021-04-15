@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Company,Interview, Task, Board, Comment
+from .models import Company,Interview, Task, Board, Comment, Tag
 
 class UserForm(forms.ModelForm):
 
@@ -10,16 +10,13 @@ class UserForm(forms.ModelForm):
         fields = ("username", "last_name", "first_name", "email",)
 
 class CompanyForm(forms.ModelForm):
-    
-    business_form = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
-        choices=(
-            ("自社開発", "自社開発"),("受託開発", "受託開発"),("SES", "SES"),
-        ),
+    tag = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects,
+        widget=forms.CheckboxSelectMultiple
     )
     class Meta:
         model = Company
-        fields = ("company_name", "url","route","business_form","location","description","phase","application_date")
+        fields = ("company_name", "url","route","location","description","phase","application_date", "tag")
 
 class InterviewForm(forms.ModelForm):
 

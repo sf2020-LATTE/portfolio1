@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
 from .forms import UserForm, CompanyForm,InterviewForm, TaskForm, BoardForm, CommentForm
-from . models import Company,Interview, Task, Board, Comment
+from . models import Company,Interview, Task, Board, Comment, Tag
 from .mixins import OnlyYouMixin
 
 from django.template.loader import render_to_string
@@ -62,6 +62,15 @@ class CompanyListView(LoginRequiredMixin, ListView):
     model = Company
     template_name = "jpapp/companies/list.html"
 
+    def get_queryset(self):
+        company_list = Company.objects.all()
+        for company in company_list:
+            company.tag_list = company.tag.all().select_related()
+        return company_list
+
+# def companies_list(request):
+#     company_list = Company.objects.all()
+#     return render(request, 'jpapp/companies/list.html', {'company_list':company_list})
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     model = Company
