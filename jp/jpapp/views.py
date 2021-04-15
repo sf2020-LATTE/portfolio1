@@ -72,7 +72,6 @@ class CompanyListView(LoginRequiredMixin, ListView):
 #     company_list = Company.objects.all()
 #     return render(request, 'jpapp/companies/list.html', {'company_list':company_list})
 
-
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     model = Company
     template_name = "jpapp/companies/detail.html"

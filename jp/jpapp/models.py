@@ -47,8 +47,6 @@ class Company(models.Model):
         blank=True,
         null=True,
     )
-    business_form = models.CharField(max_length=32,blank=True,null=True,)
-
     location = models.IntegerField(
         choices = CHOICE2,
         blank=True,

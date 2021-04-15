@@ -14,16 +14,9 @@ class CompanyForm(forms.ModelForm):
         queryset=Tag.objects,
         widget=forms.CheckboxSelectMultiple
     )
-
-    business_form = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
-        choices=(
-            ("自社開発", "自社開発"),("受託開発", "受託開発"),("SES", "SES"),
-        ),
-    )
     class Meta:
         model = Company
-        fields = ("company_name", "url","route","business_form","location","description","phase","application_date", "tag")
+        fields = ("company_name", "url","route","location","description","phase","application_date", "tag")
 
 class InterviewForm(forms.ModelForm):
 
