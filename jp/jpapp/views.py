@@ -63,10 +63,18 @@ class CompanyListView(LoginRequiredMixin, ListView):
     template_name = "jpapp/companies/list.html"
 
     def get_queryset(self):
-        company_list = Company.objects.all()
-        for company in company_list:
-            company.tag_list = company.tag.all().select_related()
-        return company_list
+        current_user = self.request.user
+        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
+            company_list = Company.objects.all()
+            for company in company_list:
+                company.tag_list = company.tag.all().select_related()
+            return company_list
+
+        else: # 一般ユーザは自分のレコードのみ表示する。
+            company_list = Company.objects.filter(user=current_user.id)
+            for company in company_list:
+                company.tag_list = company.tag.all().select_related()
+            return company_list
 
 # def companies_list(request):
 #     company_list = Company.objects.all()
