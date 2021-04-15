@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-from .views import boards_list, boards_detail
+from .views import boards_list, boards_detail, companies_list
 
 app_name = "jpapp"
 
@@ -13,7 +13,8 @@ urlpatterns = [
     path("users/<int:pk>/", views.UserDetailView.as_view(), name="users_detail"), 
     path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="users_update"), 
     #Company
-    path("companies/", views.CompanyListView.as_view(), name="companies_list"), 
+    # path("companies/", views.CompanyListView.as_view(), name="companies_list"),
+    path("companies/", companies_list, name="companies_list"), 
     path("companies/create/", views.CompanyCreateView.as_view(), name="companies_create"), 
     path("companies/<int:pk>/", views.CompanyDetailView.as_view(), name="companies_detail"),
     path("companies/<int:pk>/update/", views.CompanyUpdateView.as_view(), name="companies_update"),

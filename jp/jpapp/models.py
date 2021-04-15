@@ -54,7 +54,7 @@ class Company(models.Model):
         blank=True,
         null=True,
     )
-    tags = models.ManyToManyField(Tag, blank=True)
+    tag = models.ManyToManyField(Tag, blank=True)
 
     description = models.TextField(blank=True,null=True,)
     phase = models.IntegerField(

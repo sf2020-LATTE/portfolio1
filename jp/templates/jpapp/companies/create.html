@@ -30,6 +30,12 @@
       {{ form.business_form.errors }}
     </div>
     <div class="field">
+      <label for="{{ id_tag }}">業務形態</label>
+      {{ form.tag }}
+      <span class="helptext">{{ form.tag.help_text }}</span>
+      {{ form.tag.errors }}
+    </div>
+    <div class="field">
       <label for="{{ id_location }}">勤務地</label>
         {{ form.location }}
         <span class="helptext">{{ form.location.help_text }}</span>
