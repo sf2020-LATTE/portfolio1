@@ -34,7 +34,7 @@
         </div>
         <div>
           <p>{{ list.url|default_if_none:" "  }}</p>
-          <p>{{ list.get_route_display }}{{ list.business_form }}{{ list.get_location_display }}</p>
+          <p>{{ list.get_route_display }}{{ list.get_location_display }}</p>
           {% for tag in list.tag.all %}
           {{ tag }}
           {% endfor %}

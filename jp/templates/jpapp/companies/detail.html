@@ -11,8 +11,6 @@
     <dt class="col-sm-3">応募経路</dt>
     <dd class="col-sm-9">{{ company.get_route_display }}</dd>
     <dt class="col-sm-3">業務形態</dt>
-    <dd class="col-sm-9">{{ company.business_form }}</dd>
-    <dt class="col-sm-3">業務形態</dt>
     <dd class="col-sm-9">
       {% for tag in company.tag.all %}
         {{ tag }}
