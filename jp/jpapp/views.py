@@ -58,13 +58,13 @@ class CompanyCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-# class CompanyListView(LoginRequiredMixin, ListView):
-#     model = Company
-#     template_name = "jpapp/companies/list.html"
+class CompanyListView(LoginRequiredMixin, ListView):
+    model = Company
+    template_name = "jpapp/companies/list.html"
 
-def companies_list(request):
-    company_list = Company.objects.all()
-    return render(request, 'jpapp/companies/list.html', {'company_list':company_list})
+# def companies_list(request):
+#     company_list = Company.objects.all()
+#     return render(request, 'jpapp/companies/list.html', {'company_list':company_list})
 
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
