@@ -34,10 +34,14 @@
         </div>
         <div>
           <p>{{ list.url|default_if_none:" "  }}</p>
-          <p>{{ list.get_route_display }}{{ list.get_location_display }}</p>
+          <p>
+          応募経路：{{ list.get_route_display }}
+          勤務地：{{ list.get_location_display }}
+          業務形態：
           {% for tag in list.tag.all %}
           {{ tag }}
           {% endfor %}
+          </p>
         </div>
       </div>
     </div>
