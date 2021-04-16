@@ -63,10 +63,18 @@ class CompanyListView(LoginRequiredMixin, ListView):
     template_name = "jpapp/companies/list.html"
 
     def get_queryset(self):
-        company_list = Company.objects.all()
-        for company in company_list:
-            company.tag_list = company.tag.all().select_related()
-        return company_list
+        current_user = self.request.user
+        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
+            company_list = Company.objects.all()
+            for company in company_list:
+                company.tag_list = company.tag.all().select_related()
+            return company_list
+
+        else: # 一般ユーザは自分のレコードのみ表示する。
+            company_list = Company.objects.filter(user=current_user.id)
+            for company in company_list:
+                company.tag_list = company.tag.all().select_related()
+            return company_list
 
 # def companies_list(request):
 #     company_list = Company.objects.all()
@@ -104,6 +112,7 @@ class InterviewListView(LoginRequiredMixin, ListView):
     model = Interview
     template_name = "jpapp/interviews/list.html"
 
+
 class InterviewDetailView(LoginRequiredMixin, DetailView):
     model = Interview
     template_name = "jpapp/interviews/detail.html"
@@ -136,6 +145,14 @@ class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "jpapp/tasks/list.html"
 
+    def get_queryset(self):
+        current_user = self.request.user
+        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
+            task_list = Task.objects.all()
+            return task_list
+        else: # 一般ユーザは自分のレコードのみ表示する。
+            task_list = Task.objects.filter(user=current_user.id)
+            return task_list
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
