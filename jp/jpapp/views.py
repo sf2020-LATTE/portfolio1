@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +14,9 @@ from .mixins import OnlyYouMixin
 
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.contrib.auth import get_user_model
+
+UserModel = get_user_model( )
 
 def index(request):
   return render(request, "jpapp/index.html")
@@ -232,3 +236,9 @@ class BoardDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "jpapp/boards/delete.html"
     form_class = BoardForm
     success_url = reverse_lazy("jpapp:boards_list")
+
+def guest_login(request):
+    
+    guest_user = UserModel.objects.get(username='ゲストユーザー')
+    login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
+    return redirect('jpapp:home')
