@@ -1,20 +1,18 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
+<div class="container">
+  <h1>タスク詳細</h1>
+  <dl class="row">
+    <dt class="col-sm-3">タイトル</dt>
+    <dd class="col-sm-9">{{ task.task_title }}</dd>
+    <dt class="col-sm-3">詳細</dt>
+    <dd class="col-sm-9">{{ task.task_memo }}</dd>
+    <dt class="col-sm-3">期限</dt>
+    <dd class="col-sm-9">{{ task.duedate }}</dd>
+  </dl>
 
-<h1>タスク詳細</h1>
-<dl class="row">
-  <dt class="col-sm-3">タイトル</dt>
-  <dd class="col-sm-9">{{ task.task_title }}</dd>
-  <dt class="col-sm-3">詳細</dt>
-  <dd class="col-sm-9">{{ task.task_memo }}</dd>
-  <dt class="col-sm-3">リスト名</dt>
-  <dd class="col-sm-9">{{ task.list.task_title }}</dd>
-  <dt class="col-sm-3">ユーザー名</dt>
-  <dd class="col-sm-9">{{ card.user.username }}</dd>
-</dl>
-
-<a class="btn btn-primary" href="{% url 'jpapp:tasks_update' task.pk  %}" role="button">編集</a>
-<a class="btn btn-danger" href="{% url 'jpapp:tasks_delete' task.pk  %}" role="button">削除</a>
-
+  <a class="btn btn-primary" href="{% url 'jpapp:tasks_update' task.pk  %}" role="button">編集</a>
+  <a class="btn btn-danger" href="{% url 'jpapp:tasks_delete' task.pk  %}" role="button">削除</a>
+</div>
 {% endblock %}
