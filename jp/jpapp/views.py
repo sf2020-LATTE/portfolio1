@@ -112,10 +112,14 @@ class InterviewCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_form_kwargs(self):
+        kwargs = super(InterviewCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 class InterviewListView(LoginRequiredMixin, ListView):
     model = Interview
     template_name = "jpapp/interviews/list.html"
-
 
 class InterviewDetailView(LoginRequiredMixin, DetailView):
     model = Interview
@@ -238,7 +242,6 @@ class BoardDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("jpapp:boards_list")
 
 def guest_login(request):
-    
     guest_user = UserModel.objects.get(username='ゲストユーザー')
     login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
     return redirect('jpapp:home')
