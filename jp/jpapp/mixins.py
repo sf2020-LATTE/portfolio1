@@ -5,4 +5,4 @@ class OnlyYouMixin(UserPassesTestMixin):
 
     def test_func(self):
         user = self.request.user
-        return user.pk == self.kwargs['pk']
+        return user.pk == self.kwargs['pk'] or user.is_superuser

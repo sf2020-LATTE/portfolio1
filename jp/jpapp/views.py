@@ -1,8 +1,8 @@
 from django.contrib.auth import login
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .mixins import OnlyYouMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
@@ -10,7 +10,7 @@ from django.views.generic import DetailView, UpdateView, CreateView, ListView, D
 
 from .forms import UserForm, CompanyForm,InterviewForm, TaskForm, BoardForm, CommentForm
 from . models import Company,Interview, Task, Board, Comment, Tag
-from .mixins import OnlyYouMixin
+# from .mixins import OnlyYouMixin
 
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -40,7 +40,7 @@ def signup(request):
     }
     return render(request, 'jpapp/signup.html', context)
 
-class UserDetailView(LoginRequiredMixin,DetailView):
+class UserDetailView(OnlyYouMixin,DetailView):
     model = User
     template_name = "jpapp/users/detail.html"
 

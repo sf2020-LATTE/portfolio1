@@ -6,7 +6,10 @@
     <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    {% if user.username == "ゲストユーザー" %}
+    {% else %}
     <button type="submit" class="btn btn-primary">送信</button>
+    {% endif %}
   </form>
 </div>
 {% endblock %}

@@ -14,7 +14,9 @@
     <dd class="col-sm-9">{{ user.email }}</dd>
   </dl>
 
-  {% if user.pk == request.user.pk %}
+  {% if user.username == "ゲストユーザー" %}
+  <a class = "btn btn-primary disabled" href = "#" role = "button">編集</a>
+  {% elif user.pk == request.user.pk %}
   <a class="btn btn-primary" href="{% url 'jpapp:users_update' user.pk  %}" role="button">編集</a>
   {% else %}
   <a class = "btn btn-primary disabled" href = "#" role = "button">編集</a>
