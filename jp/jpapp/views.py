@@ -121,6 +121,16 @@ class InterviewListView(LoginRequiredMixin, ListView):
     model = Interview
     template_name = "jpapp/interviews/list.html"
 
+    def get_queryset(self):
+        current_user = self.request.user
+        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
+            interview_list = Interview.objects.all()
+            return interview_list
+        else: # 一般ユーザは自分のレコードのみ表示する。
+            interview_list = Interview.objects.filter(user=current_user.id)
+            return interview_list
+
+
 class InterviewDetailView(LoginRequiredMixin, DetailView):
     model = Interview
     template_name = "jpapp/interviews/detail.html"
@@ -132,6 +142,11 @@ class InterviewUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return resolve_url('jpapp:interviews_detail', pk=self.kwargs['pk'])
+
+    def get_form_kwargs(self):
+        kwargs = super(InterviewUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 class InterviewDeleteView(LoginRequiredMixin, DeleteView):
     model = Interview
