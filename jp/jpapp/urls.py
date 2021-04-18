@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-from .views import boards_list, boards_detail 
+from .views import boards_list, boards_detail, guest_login
 #companies_list
 
 app_name = "jpapp"
@@ -40,4 +40,6 @@ urlpatterns = [
     path("boards/<int:pk>/delete/", views.BoardDeleteView.as_view(), name="boards_delete"),
     #コメント
     path('comment/<int:comment_id>/', views.comment_delete, name='comment_delete'),
+    #かんたんログイン用
+    path('guest_login/', guest_login, name = 'guest_login'), 
 ]
