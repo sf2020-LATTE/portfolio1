@@ -24,6 +24,11 @@ class InterviewForm(forms.ModelForm):
         model = Interview
         fields = ("company", "interview_phase", "interview_datetime", "interview_description")
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(InterviewForm, self).__init__(*args, **kwargs)
+        self.fields['company'].queryset = Company.objects.filter(user=user)
+
 class TaskForm(forms.ModelForm):
 
     class Meta:

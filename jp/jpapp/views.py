@@ -112,9 +112,23 @@ class InterviewCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_form_kwargs(self):
+        kwargs = super(InterviewCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 class InterviewListView(LoginRequiredMixin, ListView):
     model = Interview
     template_name = "jpapp/interviews/list.html"
+
+    def get_queryset(self):
+        current_user = self.request.user
+        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
+            interview_list = Interview.objects.all()
+            return interview_list
+        else: # 一般ユーザは自分のレコードのみ表示する。
+            interview_list = Interview.objects.filter(user=current_user.id)
+            return interview_list
 
 
 class InterviewDetailView(LoginRequiredMixin, DetailView):
@@ -128,6 +142,11 @@ class InterviewUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return resolve_url('jpapp:interviews_detail', pk=self.kwargs['pk'])
+
+    def get_form_kwargs(self):
+        kwargs = super(InterviewUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 class InterviewDeleteView(LoginRequiredMixin, DeleteView):
     model = Interview
@@ -238,7 +257,6 @@ class BoardDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("jpapp:boards_list")
 
 def guest_login(request):
-    
     guest_user = UserModel.objects.get(username='ゲストユーザー')
     login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
     return redirect('jpapp:home')
