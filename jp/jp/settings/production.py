@@ -12,4 +12,6 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+DATABASE_URL=postgres://django:testPassword1@localhost:/djangodb
+
+ALLOWED_HOSTS =18.176.56.82
