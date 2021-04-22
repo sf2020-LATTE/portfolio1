@@ -42,7 +42,7 @@ http://18.176.56.82/jpapp/
     * コメント投稿・編集・削除機能(Ajax)
 
 # DB設計
-![Uploading スクリーンショット 2021-04-22 21.55.13.png…]()
+![スクリーンショット 2021-04-22 21 55 13](https://user-images.githubusercontent.com/67609336/115717906-96d6ce00-a3b5-11eb-913a-a983bcc95e04.png)
 
 # インフラ構成図
 ![スクリーンショット 2021-04-22 21 48 49](https://user-images.githubusercontent.com/67609336/115716847-968a0300-a3b4-11eb-8d10-7922008785de.png)
