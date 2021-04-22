@@ -2,6 +2,10 @@
 転職活動における情報を一元管理するためのアプリ。応募企業の情報管理機能とタスク管理機能と掲示板機能を実装しています。
 https://gyazo.com/9ecaf24c656a48258a206dd0e700bfd1
 
+<img width="1420" alt="スクリーンショット 2021-04-22 22 21 26" src="https://user-images.githubusercontent.com/67609336/115721807-5a0cd600-a3b9-11eb-9ad3-7c856a35c500.png">
+
+
+
 # URL
 http://18.176.56.82/jpapp/
 
