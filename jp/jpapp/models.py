@@ -116,4 +116,3 @@ class Comment(models.Model):
    created_at = models.DateTimeField('投稿日', default=timezone.now)
    def __str__(self):
        return self.text
-

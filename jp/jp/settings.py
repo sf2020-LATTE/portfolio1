@@ -118,11 +118,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 #サーバーで静的ファイルを管理する時に、どこにファイルを置くか決めるために設定
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "static"),
-# )
-# 本番環境のみで読み込まれる ()を結合し、pathを作成している
-STATIC_ROOT = os.path.join(BASE_DIR,'static') # 追加
+#ローカルのみ記載必要、本番環境ではコメントアウト
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+# 本番環境のみ必要、ローカルではコメントアウト ()を結合し、pathを作成している
+# STATIC_ROOT = os.path.join(BASE_DIR,'static') # 追加
 
 #静的ファイルをどんなURLで公開するのかを決める
 STATIC_URL = '/static/'

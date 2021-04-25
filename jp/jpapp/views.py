@@ -23,7 +23,7 @@ def index(request):
 
 @login_required
 def home(request):
-    return render(request, "jpapp/home.html")
+    return render(request, "jpapp/companies/list.html")
 
 def signup(request):
     if request.method == 'POST':
