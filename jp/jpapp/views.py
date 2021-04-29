@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
 from .forms import UserForm, CompanyForm,InterviewForm, TaskForm, BoardForm, CommentForm
-from . models import Company,Interview, Task, Board, Comment, Tag
+from . models import Company,Interview, Task, Board, Comment, Tag, Schedule
 # from .mixins import OnlyYouMixin
 
 from django.template.loader import render_to_string
@@ -267,6 +267,18 @@ def guest_login(request):
 class MonthCalendar(mixins.MonthCalendarMixin, generic.TemplateView):
     """月間カレンダーを表示するビュー"""
     template_name = 'jpapp/month.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        calendar_context = self.get_month_calendar()
+        context.update(calendar_context)
+        return context
+
+class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateView):
+    """スケジュール付きの月間カレンダーを表示するビュー"""
+    template_name = 'jpapp/month_with_schedule.html'
+    model = Schedule
+    date_field = 'date'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
