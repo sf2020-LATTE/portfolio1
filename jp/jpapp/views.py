@@ -16,6 +16,9 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 
+from django.views import generic
+from . import mixins
+
 UserModel = get_user_model( )
 
 def index(request):
@@ -260,3 +263,13 @@ def guest_login(request):
     guest_user = UserModel.objects.get(username='ゲストユーザー')
     login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
     return redirect('jpapp:home')
+
+class MonthCalendar(mixins.MonthCalendarMixin, generic.TemplateView):
+    """月間カレンダーを表示するビュー"""
+    template_name = 'jpapp/month.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        calendar_context = self.get_month_calendar()
+        context.update(calendar_context)
+        return context

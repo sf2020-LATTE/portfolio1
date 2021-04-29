@@ -42,4 +42,7 @@ urlpatterns = [
     path('comment/<int:comment_id>/', views.comment_delete, name='comment_delete'),
     #かんたんログイン用
     path('guest_login/', guest_login, name = 'guest_login'), 
+    #カレンダー用
+    path('month/', views.MonthCalendar.as_view(), name='month'),
+    path('month/<int:year>/<int:month>/', views.MonthCalendar.as_view(), name='month'),
 ]
