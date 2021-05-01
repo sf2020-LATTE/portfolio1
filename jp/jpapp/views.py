@@ -297,3 +297,16 @@ class MonthWithScheduleCalendarCreateView(mixins.MonthWithScheduleMixin, CreateV
 class MonthWithScheduleCalendarDetailView(mixins.MonthWithScheduleMixin, DetailView):
     model = Schedule
     template_name = "jpapp/month_with_schedule/detail.html"
+
+class MonthWithScheduleCalendarUpdateView(mixins.MonthWithScheduleMixin, UpdateView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/update.html"
+    form_class = BS4ScheduleForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:month_with_schedule_detail', pk=self.kwargs['pk'])
+
+    def get_form_kwargs(self):
+        kwargs = super(MonthWithScheduleCalendarUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
