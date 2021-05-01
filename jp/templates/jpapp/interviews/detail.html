@@ -5,7 +5,7 @@
   <h1>カード詳細</h1>
   <dl class="row">
     <dt class="col-sm-3">企業名</dt>
-    <dd class="col-sm-9">{{ interview.company }}</dd>
+    <dd class="col-sm-9">{{ interv.company }}</dd>
     <dt class="col-sm-3">選考フェーズ</dt>
     <dd class="col-sm-9">{{ interview.get_interview_phase_display }}</dd>
     <dt class="col-sm-3">選考日程</dt>
@@ -20,12 +20,3 @@
 
 {% endblock %}
 
-interview_phase = models.IntegerField(
-  choices = CHOICE4,
-  default='0'
-)
-interview_datetime = models.DateTimeField()
-interview_description = models.TextField()
-
-company = models.ForeignKey(Company, on_delete=models.CASCADE)
-user = models.ForeignKey(User, on_delete=models.CASCADE)

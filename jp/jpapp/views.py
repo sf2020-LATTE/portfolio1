@@ -293,3 +293,7 @@ class MonthWithScheduleCalendarCreateView(mixins.MonthWithScheduleMixin, CreateV
         kwargs = super(MonthWithScheduleCalendarCreateView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
+
+class MonthWithScheduleCalendarDetailView(mixins.MonthWithScheduleMixin, DetailView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/detail.html"
