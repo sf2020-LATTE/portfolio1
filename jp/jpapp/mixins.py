@@ -87,8 +87,14 @@ class MonthWithScheduleMixin(MonthCalendarMixin):
             # '例えば、date__range: (1日, 31日)'を動的に作る
             '{}__range'.format(self.date_field): (start, end)
         }
-        # 例えば、Schedule.objects.filter(date__range=(1日, 31日)) になる
-        queryset = self.model.objects.filter(**lookup)
+
+        current_user = self.request.user
+        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
+            queryset = self.model.objects.all()
+        else: # 一般ユーザは自分のレコードのみ表示する。
+            queryset = self.model.objects.filter(**lookup,user=current_user.id)
+        # # 例えば、Schedule.objects.filter(date__range=(1日, 31日)) になる
+        # queryset = self.model.objects.filter(**lookup)
 
         # {1日のdatetime: 1日のスケジュール全て, 2日のdatetime: 2日の全て...}のような辞書を作る
         day_schedules = {day: [] for week in days for day in week}
@@ -112,3 +118,4 @@ class MonthWithScheduleMixin(MonthCalendarMixin):
             month_days
         )
         return calendar_context
+    

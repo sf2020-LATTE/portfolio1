@@ -266,7 +266,6 @@ def guest_login(request):
     return redirect('jpapp:home')
 
 
-
 class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateView):
     """スケジュール付きの月間カレンダーを表示するビュー"""
     template_name = 'jpapp/month_with_schedule.html'
@@ -278,6 +277,7 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
         return context
+
 
 class MonthWithScheduleCalendarCreateView(mixins.MonthWithScheduleMixin, CreateView):
     model = Schedule
@@ -310,3 +310,8 @@ class MonthWithScheduleCalendarUpdateView(mixins.MonthWithScheduleMixin, UpdateV
         kwargs = super(MonthWithScheduleCalendarUpdateView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
+
+class MonthWithScheduleCalendarDeleteView(mixins.MonthWithScheduleMixin, DeleteView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/delete.html"
+    success_url = reverse_lazy("jpapp:month_with_schedule")
