@@ -45,4 +45,5 @@ urlpatterns = [
     #カレンダー用
     path('month_with_schedule/',views.MonthWithScheduleCalendar.as_view(), name='month_with_schedule'),
     path('month_with_schedule/<int:year>/<int:month>/',views.MonthWithScheduleCalendar.as_view(), name='month_with_schedule'),
+    path("month_with_schedule/create/", views.MonthWithScheduleCalendarCreateView.as_view(), name="month_with_schedule_create"),
 ]

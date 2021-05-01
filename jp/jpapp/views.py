@@ -18,6 +18,7 @@ from django.contrib.auth import get_user_model
 
 from django.views import generic
 from . import mixins
+from .forms import BS4ScheduleForm
 
 UserModel = get_user_model( )
 
@@ -277,3 +278,18 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
         return context
+
+class MonthWithScheduleCalendarCreateView(mixins.MonthWithScheduleMixin, CreateView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/create.html"
+    form_class = BS4ScheduleForm
+    success_url = reverse_lazy("jpapp:month_with_schedule")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(MonthWithScheduleCalendarCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
