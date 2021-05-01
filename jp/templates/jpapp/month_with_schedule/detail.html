@@ -19,6 +19,8 @@
     <dt class="col-sm-3">終了時間</dt>
     <dd class="col-sm-9">{{ schedule.end_time }}</dd>
   </dl>
+  <a class="btn btn-primary" href="{% url 'jpapp:month_with_schedule_update' schedule.pk  %}" role="button">編集</a>
+  <a class="btn btn-danger" href="{% url 'jpapp:month_with_schedule_delete' schedule.pk  %}" role="button">削除</a>
 </div>
 
 {% endblock %}
