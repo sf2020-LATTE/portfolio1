@@ -23,11 +23,11 @@ from .forms import BS4ScheduleForm
 UserModel = get_user_model( )
 
 def index(request):
-  return render(request, "jpapp/index.html")
+    return render(request, "jpapp/index.html")
 
 @login_required
 def home(request):
-    return render(request, "jpapp/companies/list.html")
+    return render(request, "jpapp/home.html")
 
 def signup(request):
     if request.method == 'POST':
