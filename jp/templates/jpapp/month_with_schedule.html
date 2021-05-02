@@ -3,6 +3,7 @@
     <style>
         table {
             table-layout: fixed;
+            background-color: #ffffff;
         }
 
         td > div {
@@ -44,7 +45,7 @@
                             {% endif %}
 
                             {% for schedule in schedules %}
-                                <p>{{ schedule.summary }}</p>
+                                <a href="{% url 'jpapp:month_with_schedule_detail' schedule.pk %}" class="alert-link"><p>{{ schedule.summary }}{{ schedule.start_time }}~</a></p>
                             {% endfor %}
                         </div>
                         </td>
