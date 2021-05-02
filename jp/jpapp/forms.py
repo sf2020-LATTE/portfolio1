@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Company,Interview, Task, Board, Comment, Tag
+from .models import Company, Task, Board, Comment, Tag, Schedule
 
 class UserForm(forms.ModelForm):
 
@@ -17,17 +17,6 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = ("company_name", "url","route","location","description","phase","application_date", "tag")
-
-class InterviewForm(forms.ModelForm):
-
-    class Meta:
-        model = Interview
-        fields = ("company", "interview_phase", "interview_datetime", "interview_description")
-
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
-        super(InterviewForm, self).__init__(*args, **kwargs)
-        self.fields['company'].queryset = Company.objects.filter(user=user)
 
 class TaskForm(forms.ModelForm):
 
@@ -46,3 +35,42 @@ class CommentForm(forms.ModelForm):
    class Meta:
        model = Comment
        fields = ['text']
+
+class BS4ScheduleForm(forms.ModelForm):
+    """Bootstrapに対応するためのModelForm"""
+
+    class Meta:
+        model = Schedule
+        fields = ('summary', 'description','date','start_time', 'end_time','company', 'interview_phase', )
+        widgets = {
+            'summary': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+            }),
+            'date': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'start_time': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'end_time': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+        }
+
+    def clean_end_time(self):
+        start_time = self.cleaned_data['start_time']
+        end_time = self.cleaned_data['end_time']
+        if end_time <= start_time:
+            raise forms.ValidationError(
+                '終了時間は、開始時間よりも後にしてください'
+            )
+        return end_time
+
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(BS4ScheduleForm, self).__init__(*args, **kwargs)
+        self.fields['company'].queryset = Company.objects.filter(user=user)

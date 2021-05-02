@@ -1,0 +1,60 @@
+{% extends 'jpapp/base.html' %}
+{% block content %}
+    <style>
+        table {
+            table-layout: fixed;
+            background-color: #ffffff;
+        }
+
+        td > div {
+            height: 100px;
+            overflow: auto;
+            white-space: nowrap;
+        }
+
+    </style>
+    <div class="container">
+    <a class="btn btn-primary my-3" href="{% url 'jpapp:month_with_schedule_create' %}" role="button"><i class="fas fa-calendar-plus"></i>予定を追加</a> 
+        <div class="container">  
+            <a href="{% url 'jpapp:month_with_schedule' month_previous.year month_previous.month %}">前月</a>
+            {{ month_current | date:"Y年m月" }}
+            <a href="{% url 'jpapp:month_with_schedule' month_next.year month_next.month %}">次月</a>
+            <table class="table">
+                <thead>
+                <tr>
+                    {% for w in week_names %}
+                        <th>{{ w }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for week_day_schedles in month_day_schedules %}
+                    <tr>
+                        {% for day, schedules in week_day_schedles.items %}
+                            {% if now == day %}
+                                <td class="table-success">
+                                    {% else %}
+                                <td>
+                            {% endif %}
+
+                        <div>
+                            {% if month_current.month != day.month %}
+                                {{ day | date:"m/d" }}
+                            {% else %}
+                                {{ day.day }}
+                            {% endif %}
+
+                            {% for schedule in schedules %}
+                                <a href="{% url 'jpapp:month_with_schedule_detail' schedule.pk %}" class="alert-link"><p>{{ schedule.summary }}{{ schedule.start_time }}~</a></p>
+                            {% endfor %}
+                        </div>
+                        </td>
+                        {% endfor %}
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>  
+    </div>
+{% endblock %}

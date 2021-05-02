@@ -68,24 +68,6 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
-CHOICE4 = ((0, 'カジュアル面談'),
-          (1, '一次面接'),
-          (2, '二次面接'),
-          (3, '三次面接'))
-
-class Interview(models.Model):
-    interview_phase = models.IntegerField(
-      choices = CHOICE4,
-      default='0'
-    )
-    interview_datetime = models.DateTimeField()
-    interview_description = models.TextField()
-
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.interview_phase
-
 class Task(models.Model):
     task_title = models.CharField(max_length=100)
     task_memo = models.TextField()
@@ -116,3 +98,27 @@ class Comment(models.Model):
    created_at = models.DateTimeField('投稿日', default=timezone.now)
    def __str__(self):
        return self.text
+
+CHOICE4 = ((0, 'カジュアル面談'),
+          (1, '一次面接'),
+          (2, '二次面接'),
+          (3, '三次面接'))
+
+class Schedule(models.Model):
+    """スケジュール"""
+    interview_phase = models.IntegerField(
+      choices = CHOICE4,
+      default='0'
+    )
+    summary = models.CharField('概要', max_length=50)
+    description = models.TextField('詳細な説明', blank=True)
+    start_time = models.TimeField('開始時間', default=datetime.time(7, 0, 0))
+    end_time = models.TimeField('終了時間', default=datetime.time(7, 0, 0))
+    date = models.DateField('日付')
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.summary

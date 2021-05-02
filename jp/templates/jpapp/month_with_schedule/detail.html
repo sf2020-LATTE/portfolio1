@@ -1,0 +1,26 @@
+{% extends "jpapp/base.html" %}
+
+{% block content %}
+<div class="container">
+  <h1>予定詳細</h1>
+  <dl class="row">
+    <dt class="col-sm-3">企業名</dt>
+    <dd class="col-sm-9">{{ schedule.company }}</dd>
+    <dt class="col-sm-3">選考フェーズ</dt>
+    <dd class="col-sm-9">{{ schedule.get_interview_phase_display }}</dd>
+    <dt class="col-sm-3">タイトル</dt>
+    <dd class="col-sm-9">{{ schedule.summary }}</dd>
+    <dt class="col-sm-3">詳細</dt>
+    <dd class="col-sm-9">{{ schedule.description }}</dd>
+    <dt class="col-sm-3">日付</dt>
+    <dd class="col-sm-9">{{ schedule.date }}</dd>
+    <dt class="col-sm-3">開始時間</dt>
+    <dd class="col-sm-9">{{ schedule.start_time }}</dd>
+    <dt class="col-sm-3">終了時間</dt>
+    <dd class="col-sm-9">{{ schedule.end_time }}</dd>
+  </dl>
+  <a class="btn btn-primary" href="{% url 'jpapp:month_with_schedule_update' schedule.pk  %}" role="button">編集</a>
+  <a class="btn btn-danger" href="{% url 'jpapp:month_with_schedule_delete' schedule.pk  %}" role="button">削除</a>
+</div>
+
+{% endblock %}

@@ -9,10 +9,10 @@
   <div class="alert alert-light border-top rounded-0" role="alert">
     <div class="row">
       <div class="col-sm-4 border-right">
-        <a href="{% url 'jpapp:interviews_create' %}"><i class="far fa-calendar-alt"></i></a><br>
+        <a href="{% url 'jpapp:month_with_schedule_create' %}"><i class="fas fa-calendar-plus"></i></a><br>
         応募日：{{ list.application_date|default_if_none:" " }}<br>
-        {% for interview in list.interview_set.all %}
-        <a href="{% url 'jpapp:interviews_detail' interview.pk %}" class="alert-link">{{ interview.get_interview_phase_display }} {{ interview.interview_datetime }}</a><br>
+        {% for schedule in list.schedule_set.all %}
+          <a href="{% url 'jpapp:month_with_schedule_detail' schedule.pk %}" class="alert-link">{{ schedule.get_interview_phase_display }}/{{ schedule.date }}</a><br>
         {% endfor %}
       </div>
       <div class="col-sm-8">

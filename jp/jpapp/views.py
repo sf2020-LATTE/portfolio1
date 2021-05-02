@@ -8,22 +8,26 @@ from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm,InterviewForm, TaskForm, BoardForm, CommentForm
-from . models import Company,Interview, Task, Board, Comment, Tag
+from .forms import UserForm, CompanyForm,TaskForm, BoardForm, CommentForm
+from . models import Company,Task, Board, Comment, Tag, Schedule
 # from .mixins import OnlyYouMixin
 
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 
+from django.views import generic
+from . import mixins
+from .forms import BS4ScheduleForm
+
 UserModel = get_user_model( )
 
 def index(request):
-  return render(request, "jpapp/index.html")
+    return render(request, "jpapp/index.html")
 
 @login_required
 def home(request):
-    return render(request, "jpapp/companies/list.html")
+    return render(request, "jpapp/home.html")
 
 def signup(request):
     if request.method == 'POST':
@@ -101,58 +105,6 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "jpapp/companies/delete.html"
     form_class = CompanyForm
     success_url = reverse_lazy("jpapp:companies_list")
-
-class InterviewCreateView(LoginRequiredMixin, CreateView):
-    model = Interview
-    template_name = "jpapp/interviews/create.html"
-    form_class = InterviewForm
-    success_url = reverse_lazy("jpapp:interviews_list")
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    def get_form_kwargs(self):
-        kwargs = super(InterviewCreateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
-
-class InterviewListView(LoginRequiredMixin, ListView):
-    model = Interview
-    template_name = "jpapp/interviews/list.html"
-
-    def get_queryset(self):
-        current_user = self.request.user
-        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
-            interview_list = Interview.objects.all()
-            return interview_list
-        else: # 一般ユーザは自分のレコードのみ表示する。
-            interview_list = Interview.objects.filter(user=current_user.id)
-            return interview_list
-
-
-class InterviewDetailView(LoginRequiredMixin, DetailView):
-    model = Interview
-    template_name = "jpapp/interviews/detail.html"
-
-class InterviewUpdateView(LoginRequiredMixin, UpdateView):
-    model = Interview
-    template_name = "jpapp/interviews/update.html"
-    form_class = InterviewForm
-
-    def get_success_url(self):
-        return resolve_url('jpapp:interviews_detail', pk=self.kwargs['pk'])
-
-    def get_form_kwargs(self):
-        kwargs = super(InterviewUpdateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
-
-class InterviewDeleteView(LoginRequiredMixin, DeleteView):
-    model = Interview
-    template_name = "jpapp/interviews/delete.html"
-    form_class = InterviewForm
-    success_url = reverse_lazy("jpapp:interviews_list")
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
@@ -260,3 +212,54 @@ def guest_login(request):
     guest_user = UserModel.objects.get(username='ゲストユーザー')
     login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
     return redirect('jpapp:home')
+
+
+class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateView):
+    """スケジュール付きの月間カレンダーを表示するビュー"""
+    template_name = 'jpapp/month_with_schedule.html'
+    model = Schedule
+    date_field = 'date'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        calendar_context = self.get_month_calendar()
+        context.update(calendar_context)
+        return context
+
+
+class MonthWithScheduleCalendarCreateView(mixins.MonthWithScheduleMixin, CreateView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/create.html"
+    form_class = BS4ScheduleForm
+    success_url = reverse_lazy("jpapp:month_with_schedule")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(MonthWithScheduleCalendarCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+class MonthWithScheduleCalendarDetailView(mixins.MonthWithScheduleMixin, DetailView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/detail.html"
+
+class MonthWithScheduleCalendarUpdateView(mixins.MonthWithScheduleMixin, UpdateView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/update.html"
+    form_class = BS4ScheduleForm
+
+    def get_success_url(self):
+        return resolve_url('jpapp:month_with_schedule_detail', pk=self.kwargs['pk'])
+
+    def get_form_kwargs(self):
+        kwargs = super(MonthWithScheduleCalendarUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+class MonthWithScheduleCalendarDeleteView(mixins.MonthWithScheduleMixin, DeleteView):
+    model = Schedule
+    template_name = "jpapp/month_with_schedule/delete.html"
+    success_url = reverse_lazy("jpapp:month_with_schedule")

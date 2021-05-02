@@ -2,11 +2,8 @@
 
 {% block content %}
   <div class="container">
-    <h1 class="display-4">JP</h1>
-    <p class="lead">サインアップ完了</p>
+    <h1 class="display-4">サインアップ完了</h1>
+    <p class="lead">{{ request.user.username }}さんようこそ</p>
     <hr class="my-4">
-    <p>Django</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">ログイン</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">サインアップ</a>
   </div>
 {% endblock %}
