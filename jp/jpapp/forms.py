@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Company,Interview, Task, Board, Comment, Tag, Schedule
+from .models import Company, Task, Board, Comment, Tag, Schedule
 
 class UserForm(forms.ModelForm):
 
@@ -17,17 +17,6 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = ("company_name", "url","route","location","description","phase","application_date", "tag")
-
-class InterviewForm(forms.ModelForm):
-
-    class Meta:
-        model = Interview
-        fields = ("company", "interview_phase", "interview_datetime", "interview_description")
-
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
-        super(InterviewForm, self).__init__(*args, **kwargs)
-        self.fields['company'].queryset = Company.objects.filter(user=user)
 
 class TaskForm(forms.ModelForm):
 

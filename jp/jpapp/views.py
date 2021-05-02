@@ -8,8 +8,8 @@ from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm,InterviewForm, TaskForm, BoardForm, CommentForm
-from . models import Company,Interview, Task, Board, Comment, Tag, Schedule
+from .forms import UserForm, CompanyForm,TaskForm, BoardForm, CommentForm
+from . models import Company,Task, Board, Comment, Tag, Schedule
 # from .mixins import OnlyYouMixin
 
 from django.template.loader import render_to_string
@@ -105,58 +105,6 @@ class CompanyDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "jpapp/companies/delete.html"
     form_class = CompanyForm
     success_url = reverse_lazy("jpapp:companies_list")
-
-class InterviewCreateView(LoginRequiredMixin, CreateView):
-    model = Interview
-    template_name = "jpapp/interviews/create.html"
-    form_class = InterviewForm
-    success_url = reverse_lazy("jpapp:interviews_list")
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    def get_form_kwargs(self):
-        kwargs = super(InterviewCreateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
-
-class InterviewListView(LoginRequiredMixin, ListView):
-    model = Interview
-    template_name = "jpapp/interviews/list.html"
-
-    def get_queryset(self):
-        current_user = self.request.user
-        if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
-            interview_list = Interview.objects.all()
-            return interview_list
-        else: # 一般ユーザは自分のレコードのみ表示する。
-            interview_list = Interview.objects.filter(user=current_user.id)
-            return interview_list
-
-
-class InterviewDetailView(LoginRequiredMixin, DetailView):
-    model = Interview
-    template_name = "jpapp/interviews/detail.html"
-
-class InterviewUpdateView(LoginRequiredMixin, UpdateView):
-    model = Interview
-    template_name = "jpapp/interviews/update.html"
-    form_class = InterviewForm
-
-    def get_success_url(self):
-        return resolve_url('jpapp:interviews_detail', pk=self.kwargs['pk'])
-
-    def get_form_kwargs(self):
-        kwargs = super(InterviewUpdateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
-
-class InterviewDeleteView(LoginRequiredMixin, DeleteView):
-    model = Interview
-    template_name = "jpapp/interviews/delete.html"
-    form_class = InterviewForm
-    success_url = reverse_lazy("jpapp:interviews_list")
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
