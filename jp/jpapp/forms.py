@@ -74,3 +74,17 @@ class BS4ScheduleForm(forms.ModelForm):
         user = kwargs.pop('user')
         super(BS4ScheduleForm, self).__init__(*args, **kwargs)
         self.fields['company'].queryset = Company.objects.filter(user=user)
+
+
+class CompanySearchForm(forms.Form):
+    """企業検索フォーム。"""
+    key_word = forms.CharField(
+        label='検索キーワード',
+        required=False,
+    )
+
+    tag_name = forms.ModelMultipleChoiceField(
+        label='タグでの絞り込み',
+        required=False,
+        queryset=Tag.objects.order_by('tag_name'),
+    )

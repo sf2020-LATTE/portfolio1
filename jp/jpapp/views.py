@@ -8,7 +8,7 @@ from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm,TaskForm, BoardForm, CommentForm
+from .forms import UserForm, CompanyForm,TaskForm, BoardForm, CommentForm,CompanySearchForm
 from . models import Company,Task, Board, Comment, Tag, Schedule
 # from .mixins import OnlyYouMixin
 
@@ -84,9 +84,11 @@ class CompanyListView(LoginRequiredMixin, ListView):
                 company.tag_list = company.tag.all().select_related()
             return company_list
 
-# def companies_list(request):
-#     company_list = Company.objects.all()
-#     return render(request, 'jpapp/companies/list.html', {'company_list':company_list})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_form'] = CompanySearchForm(self.request.GET or None)
+        return context
+
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     model = Company
