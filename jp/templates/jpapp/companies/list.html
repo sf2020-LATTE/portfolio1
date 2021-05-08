@@ -6,7 +6,7 @@
     {{ search_form.key_word }}
     <button type="submit" id="search-button">検索</button>
     <div class="inline-checkbox">
-        {{ search_form.tags }}
+        {{ search_form.tag_name }}
     </div>
   </form>
   <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a> 
