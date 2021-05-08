@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from .models import Company, Task, Board, Comment, Tag, Schedule
+from .widgets import CustomCheckboxSelectMultiple
 
 class UserForm(forms.ModelForm):
 
@@ -87,4 +88,5 @@ class CompanySearchForm(forms.Form):
         label='タグでの絞り込み',
         required=False,
         queryset=Tag.objects.order_by('tag_name'),
+        widget=CustomCheckboxSelectMultiple,
     )

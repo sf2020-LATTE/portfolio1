@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jpapp.apps.JpappConfig',
+    'django.forms', #widgetsのtemplates探索用
 ]
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'#widgetsのtemplates探索用
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

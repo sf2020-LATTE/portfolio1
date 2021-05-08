@@ -69,3 +69,79 @@ div.field > input, div.field > textarea, div.field > select, div.field > button 
   border-radius: 4px;
   border: solid 1px #999;
 }
+
+/* カスタムチェックボックス用のcss */
+.custom-checkbox {
+  display: none;
+}
+
+.custom-checkbox:checked + .custom-checkbox-label {
+  background: #00809d;
+  color: #fff;
+}
+
+.custom-checkbox-label {
+  box-sizing: border-box;
+  display: inline-block;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  border: solid 1px #ccc;
+  transition: 0.25s;
+  padding: 4px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 3px;
+}
+
+.custom-checkbox-label:hover {
+  opacity: 0.5;
+}
+/* 横スクロール */
+.inline-checkbox {
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+}
+input[type=text], input[type=email], input[type=number],
+select, textarea {
+    font-size: 14px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: solid 1px #ccc;
+    background-color: #fff;
+    font-family: "Ubuntu", "Noto Sans JP", sans-serif;
+}
+
+button, a.button {
+  font-size: 14px;
+  -webkit-appearance: none;
+  padding: 4px 16px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: solid 1px #ccc;
+  vertical-align: bottom;
+  font-family: "Ubuntu", "Noto Sans JP", sans-serif;
+
+  /* a要素用の設定 */
+  box-sizing: border-box;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: #333;
+
+  /* button要素用の設定 */
+  cursor: pointer;
+}
+
+button:hover, a.button:hover {
+  opacity: 0.5;
+}
+
+button.btn-link, a.btn-link {
+  border: none;
+  color: #00809d;
+  vertical-align: initial;
+}
