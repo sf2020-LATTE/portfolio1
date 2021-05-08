@@ -1,6 +1,18 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
+<script>
+  document.addEventListener('DOMContentLoaded', e => {
+
+      const searchForm = document.getElementById('search-form');
+
+      for (const check of document.getElementsByName('tag_name')) {
+          check.addEventListener('change', () => {
+              searchForm.submit();
+          });
+      }
+  });
+</script>
 <div class="container">
   <form id="search-form" action="" method="GET">
     {{ search_form.key_word }}
