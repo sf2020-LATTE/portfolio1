@@ -145,3 +145,16 @@ button.btn-link, a.btn-link {
   color: #00809d;
   vertical-align: initial;
 }
+
+
+.tag {
+  margin-right: 5px;
+  cursor: pointer;
+  color: #00809d;
+  font-size: 14px;
+}
+
+.tag:hover {
+  opacity: 0.5;
+  text-decoration: underline;
+}

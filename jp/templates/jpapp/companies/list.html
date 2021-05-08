@@ -6,6 +6,19 @@
 
       const searchForm = document.getElementById('search-form');
 
+      for (const tag of document.getElementsByClassName('tag')) {
+          tag.addEventListener('click', () => {
+              const pk = tag.dataset.pk;
+              const checkbox = document.querySelector(`input[name="tag_name"][value="${pk}"]`);
+              if (checkbox.checked) {
+                  checkbox.checked = false;
+              } else {
+                  checkbox.checked = true;
+              }
+              searchForm.submit();
+          });
+      }
+
       for (const check of document.getElementsByName('tag_name')) {
           check.addEventListener('change', () => {
               searchForm.submit();
@@ -54,12 +67,10 @@
           <p>{{ list.url|default_if_none:" "  }}</p>
           <p>
           応募経路：{{ list.get_route_display }}
-          勤務地：{{ list.get_location_display }}
-          業務形態：
+          勤務地：{{ list.get_location_display }}<br>
           {% for tag in list.tag.all %}
-          {{ tag }}
+            <span class="tag" data-pk="{{ tag.pk }}">{{ tag }}</span>
           {% endfor %}
-          </p>
         </div>
       </div>
     </div>
