@@ -50,10 +50,9 @@ https://www.job-port.work/jpapp/
     * コメント投稿・編集・削除機能(Ajax)
 
 # DB設計
-![スクリーンショット 2021-04-22 21 55 13](https://user-images.githubusercontent.com/67609336/115717906-96d6ce00-a3b5-11eb-913a-a983bcc95e04.png)
-
+![スクリーンショット 2021-05-12 20 56 06](https://user-images.githubusercontent.com/67609336/117975314-86d55d00-b369-11eb-8d2f-4012730ce1fa.png)
 # インフラ構成図
-![スクリーンショット 2021-04-22 21 48 49](https://user-images.githubusercontent.com/67609336/115716847-968a0300-a3b4-11eb-8d10-7922008785de.png)
+![スクリーンショット 2021-05-12 21 30 00](https://user-images.githubusercontent.com/67609336/117975573-c4d28100-b369-11eb-8477-f226ad9b4af0.png)
 
 # 今後追加したい機能等
 ## 機能面
