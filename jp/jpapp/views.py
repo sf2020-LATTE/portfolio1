@@ -8,9 +8,10 @@ from django.shortcuts import render,redirect, resolve_url, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 
-from .forms import UserForm, CompanyForm,TaskForm, BoardForm, CommentForm
+from .forms import UserForm, CompanyForm,TaskForm, BoardForm, CommentForm,CompanySearchForm
 from . models import Company,Task, Board, Comment, Tag, Schedule
 # from .mixins import OnlyYouMixin
+from django.db.models import Q
 
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -73,20 +74,52 @@ class CompanyListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         current_user = self.request.user
         if current_user.is_superuser: # スーパーユーザの場合、リストにすべてを表示する。
-            company_list = Company.objects.all()
-            for company in company_list:
-                company.tag_list = company.tag.all().select_related()
+            queryset = Company.objects.all()
+            self.form = form = CompanySearchForm(self.request.GET or None)
+            if form.is_valid():
+                # 選択したタグが含まれた記事
+                tags = form.cleaned_data.get('tag_name')
+                if tags:
+                    for tag in tags:
+                        queryset = queryset.filter(tag=tag)
+
+                # タイトルか本文にキーワードが含まれたもの
+                # キーワードが半角スペースで区切られていれば、その回数だけfilterする。つまりAND。
+                key_word = form.cleaned_data.get('key_word')
+                if key_word:
+                    for word in key_word.split():
+                        queryset = queryset.filter(Q(company_name__icontains=word) | Q(description__icontains=word))
+
+            company_list = queryset.prefetch_related('tag')
             return company_list
 
         else: # 一般ユーザは自分のレコードのみ表示する。
-            company_list = Company.objects.filter(user=current_user.id)
-            for company in company_list:
-                company.tag_list = company.tag.all().select_related()
+            queryset = Company.objects.filter(user=current_user.id)
+            self.form = form = CompanySearchForm(self.request.GET or None)
+
+            if form.is_valid():
+                # 選択したタグが含まれた記事
+                tags = form.cleaned_data.get('tag_name')
+                if tags:
+                    for tag in tags:
+                        queryset = queryset.filter(tag=tag)
+
+                # タイトルか本文にキーワードが含まれたもの
+                # キーワードが半角スペースで区切られていれば、その回数だけfilterする。つまりAND。
+                key_word = form.cleaned_data.get('key_word')
+                if key_word:
+                    for word in key_word.split():
+                        queryset = queryset.filter(Q(company_name__icontains=word) | Q(description__icontains=word))
+
+            company_list = queryset.prefetch_related('tag')
             return company_list
 
-# def companies_list(request):
-#     company_list = Company.objects.all()
-#     return render(request, 'jpapp/companies/list.html', {'company_list':company_list})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_form'] = CompanySearchForm(self.request.GET or None)
+        return context
+
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     model = Company

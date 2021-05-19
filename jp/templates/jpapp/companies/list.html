@@ -1,10 +1,66 @@
 {% extends "jpapp/base.html" %}
 
 {% block content %}
-<div class="container">
-  <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a> 
-  <div class="container">
+<script>
+  document.addEventListener('DOMContentLoaded', e => {
 
+      const searchForm = document.getElementById('search-form');
+
+      for (const tag of document.getElementsByClassName('tag')) {
+          tag.addEventListener('click', () => {
+              const pk = tag.dataset.pk;
+              const checkbox = document.querySelector(`input[name="tag_name"][value="${pk}"]`);
+              if (checkbox.checked) {
+                  checkbox.checked = false;
+              } else {
+                  checkbox.checked = true;
+              }
+              searchForm.submit();
+          });
+      }
+      for (const check of document.getElementsByName('tag_name')) {
+          check.addEventListener('change', () => {
+              searchForm.submit();
+          });
+      }
+  });
+</script>
+<nav class="navbar navbar-light" style="background-color: #DDDDDD;">
+  <!-- Navbar content -->
+  <form id="search-form" action="" method="GET">
+    {{ search_form.key_word }}
+    <button type="submit" id="search-button">検索</button>
+    <div class="inline-checkbox">
+      {{ search_form.tag_name }}
+    </div>
+  </form>
+</nav>
+<div class="container">
+  <a class="btn btn-primary my-3" href="{% url 'jpapp:companies_create' %}" role="button"><i class="far fa-edit"></i>企業を登録</a>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    企業を検索
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <div class="container">
   {% for list in company_list %}
   <div class="alert alert-light border-top rounded-0" role="alert">
     <div class="row">
@@ -36,12 +92,10 @@
           <p>{{ list.url|default_if_none:" "  }}</p>
           <p>
           応募経路：{{ list.get_route_display }}
-          勤務地：{{ list.get_location_display }}
-          業務形態：
+          勤務地：{{ list.get_location_display }}<br>
           {% for tag in list.tag.all %}
-          {{ tag }}
+            <span class="tag" data-pk="{{ tag.pk }}">{{ tag }}</span>
           {% endfor %}
-          </p>
         </div>
       </div>
     </div>
