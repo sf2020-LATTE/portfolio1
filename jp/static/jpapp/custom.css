@@ -73,6 +73,7 @@ div.field > input, div.field > textarea, div.field > select, div.field > button 
 /* カスタムチェックボックス用のcss */
 .custom-checkbox {
   display: none;
+  background-color: #fff;
 }
 
 .custom-checkbox:checked + .custom-checkbox-label {
@@ -92,6 +93,7 @@ div.field > input, div.field > textarea, div.field > select, div.field > button 
   cursor: pointer;
   font-size: 14px;
   margin: 3px;
+  background-color: #fff;
 }
 
 .custom-checkbox-label:hover {
